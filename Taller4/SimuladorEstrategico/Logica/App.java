@@ -20,7 +20,6 @@ public class App {
 		} catch(Exception e) {
 			System.out.println("Error al leer el archivo: " + e.getMessage());
 			return;
-			//test
 		}
 	}
 
