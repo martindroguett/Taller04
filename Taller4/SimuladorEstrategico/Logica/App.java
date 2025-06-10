@@ -9,17 +9,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class App {
-	//TESTTTTTT
-	//TEST2
-	//test
 	private static Sistema sistema = SistemaImpl.getInstance();
 	private Scanner scanner = new Scanner(System.in);
 	
 	public static void main(String[] args) {
 		try {
-			cargarUsuarios("usuarios.txt");
-			cargarDinos("dinosaurios.txt");
-			cargarArmamentos("armamentos.txt");
+			cargarUsuarios("txts/usuarios.txt");
+			cargarDinos("txts/dinosaurios.txt");
+			cargarArmamentos("txts/armamentos.txt");
 		} catch(Exception e) {
 			System.out.println("Error al leer el archivo: " + e.getMessage());
 			return;
