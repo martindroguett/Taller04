@@ -25,4 +25,10 @@ public class SistemaImpl implements Sistema {
 		
 	}
 
+	@Override
+	public void crearDino(int id, String nombre, String tipo, String estado) {
+		dinosaurios.add(new Dinosaurio(id, nombre, tipo, estado));
+		
+	}
+
 }

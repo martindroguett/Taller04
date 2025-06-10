@@ -12,7 +12,7 @@ public class App {
 	private static Sistema sistema = SistemaImpl.getInstance();
 	private Scanner scanner = new Scanner(System.in);
 	
-	public static void main(String[] args) throws FileNotFoundException{
+	public static void main(String[] args) {
 		try {
 			cargarUsuarios("usuarios.txt");
 			cargarDinos("dinosaurios.txt");
@@ -20,7 +20,6 @@ public class App {
 		} catch(Exception e) {
 			System.out.println("Error al leer el archivo: " + e.getMessage());
 			return;
-			//test
 		}
 	}
 
@@ -43,8 +42,14 @@ public class App {
 		Scanner lector = new Scanner(new File(file));
 		while(lector.hasNextLine()) {
 			String [] partes = lector.nextLine().split(",");
-
+			int id = Integer.parseInt(partes[0]);
+			String nombre = partes[1];
+			String tipo = partes[2];
+			String estado = partes[3];
+			
+			sistema.crearDino(id, nombre, tipo, estado);
 		}
+		lector.close();
 	}
 
 	private static void cargarUsuarios(String file) throws FileNotFoundException {
