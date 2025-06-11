@@ -121,7 +121,7 @@ public class SistemaImpl implements Sistema {
 		
 // =============================================================================================================
 		
-		JButton entrar = new JButton("Sing in");
+		JButton entrar = new JButton("Sign in");
 		largo = 80;
 		ancho = 30;
 		
@@ -129,6 +129,7 @@ public class SistemaImpl implements Sistema {
 		entrar.setBackground(Color.CYAN);
 		entrar.addActionListener(e -> {
 			System.out.println("Tienen que pasar cosas");
+			validar(usuario.getText(), contraseña.getName());
 		});
 		
 		inicioSesion.add(titulo);
@@ -140,6 +141,24 @@ public class SistemaImpl implements Sistema {
 		inicioSesion.add(entrar);
 		
 		return inicioSesion;
+	}
+
+	private void validar(String text, String text2) {
+		boolean esta = false;
+		System.out.println(text);
+		for (Usuario u: usuarios) {
+			if (u.getNombre().equals(text)) {
+				esta = true;
+			}
+		}
+		
+		if(esta) {
+			System.out.println("Si");
+		}
+		else {
+		System.out.println("No");
+		}	
+		
 	}
 
 	private void generarFrame() {
