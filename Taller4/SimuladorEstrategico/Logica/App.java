@@ -21,6 +21,10 @@ public class App {
 			System.out.println("Error al leer el archivo: " + e.getMessage());
 			return;
 		}
+		
+		sistema.iniciar();
+		
+		
 	}
 
 	private static void cargarArmamentos(String file) throws FileNotFoundException {
@@ -56,6 +60,12 @@ public class App {
 		Scanner lector = new Scanner(new File(file));
 		while(lector.hasNextLine()) {
 			String [] partes = lector.nextLine().split(",");
+			int id = Integer.parseInt(partes[0]);
+			String nombre = partes[1];
+			String contraseña = partes[2];
+			String rol = partes[3];
+			
+			sistema.crearUsuario(id, nombre, contraseña, rol);
 			
 		}
 		lector.close();
