@@ -9,5 +9,7 @@ public interface Sistema {
 	void crearUsuario(int id, String nombre, String contraseña, String rol);
 
 	void iniciar();
+	
+	boolean removeArmamento(int id);
 
 }

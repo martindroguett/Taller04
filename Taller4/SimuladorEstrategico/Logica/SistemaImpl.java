@@ -173,4 +173,24 @@ public class SistemaImpl implements Sistema {
 		
 	}
 
+	// MÉTODO PARA ELIMINAR EL ARMEMENTO DE LA LISTA DE ARMAMENTOS
+	@Override
+	public boolean removeArmamento(int id) {
+		Armamento eliminar = buscarAmamento(id);
+		if (eliminar != null) {
+			armamentos.remove(eliminar);
+			return true; // SI SE ENCUENTRA RETORNA VERDADERO
+		} 
+		return false; 
+	}
+
+	// MÉTODO PARA BUSCAR EL ARMAMENTO SEGÚN EL ID 
+	private Armamento buscarAmamento(int id) {
+		for (Armamento a: armamentos) {
+			if(a.getId() == id) return a;
+		}
+		// SI ES QUE NO LO ENCUENTRA RETORNA NULO
+		return null;
+	}
+
 }
