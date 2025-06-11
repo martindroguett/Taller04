@@ -1,5 +1,8 @@
 package Logica;
 
+import Dominio.*;
+import java.util.*;
+
 public interface Sistema {
 
 	void crearArmamento(int id, String nombre, String tipo, String estado);
@@ -9,5 +12,11 @@ public interface Sistema {
 	void crearUsuario(int id, String nombre, String contraseña, String rol);
 
 	void iniciar();
+	
+	List<Usuario> getUsuarios();
+	
+	List<Dinosaurio> getDinos();
+	
+	List<Armamento> getArmas();
 
 }
