@@ -129,7 +129,7 @@ public class SistemaImpl implements Sistema {
 		entrar.setBackground(Color.CYAN);
 		entrar.addActionListener(e -> {
 			System.out.println("Tienen que pasar cosas");
-			validar(usuario.getText(), contraseña.getName());
+			validar(usuario.getText(), contraseña.getText());
 		});
 		
 		inicioSesion.add(titulo);
