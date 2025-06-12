@@ -135,11 +135,68 @@ public class Gui {
 		bienvenida.setLocation((x - bienvenida.getWidth()) / 2, (y - bienvenida.getHeight()) / 8);
 	
 //=============================================================================================================
-		
+		JButton gestion = new JButton("Gestionar Armamento");
+		int largo = 300;
+		int ancho = 50;
+
+		gestion.setBounds((x - largo) / 2, (y - ancho) / 5, largo, ancho);
+		gestion.addActionListener(e -> {
+			ventana.getContentPane().removeAll();
+			ventana.getContentPane().add(panelGestionArmamento());
+			ventana.revalidate();
+			ventana.repaint();
+		});
 		
 		menuPrincipal.add(bienvenida);
+		menuPrincipal.add(gestion);
 		
 		return menuPrincipal;
+	}
+
+	private JPanel panelGestionArmamento() {
+		JPanel menu = new JPanel(); //Panel menu
+		menu.setLayout(null);
+		menu.setBackground(new Color(120, 120, 100));
+		
+//=============================================================================================================
+		
+		JPanel listado = new JPanel(); //Panel donde se muestran los armamentos
+		listado.setLayout(null);
+		listado.setSize(500, 600);
+		listado.setLocation((x - 600), (y - 700) / 2 + 100);
+		
+//=============================================================================================================
+		
+		JButton mostrar = new JButton("Mostrar Armamento"); //Botón mostrar armamento
+		mostrar.setSize(200, 50);
+		mostrar.setLocation((x - 450), (y / 8) - 25);
+	
+//=============================================================================================================
+		
+		JLabel idArmamento = new JLabel("ID Armamento: "); //Label Id Armamento
+		idArmamento.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		idArmamento.setSize(idArmamento.getPreferredSize());
+		idArmamento.setLocation((x / 8) + 25, (y / 4));
+		
+//=============================================================================================================
+		
+		JTextField pedirId = new JTextField();
+		pedirId.setSize(idArmamento.getWidth(), idArmamento.getHeight() + 5);
+		pedirId.setLocation((x / 8) + 23, (y / 4) + idArmamento.getHeight());
+		
+//=============================================================================================================
+		
+		JButton eliminar = new JButton("Eliminar Armamento"); //Botón mostrar armamento
+		eliminar.setSize(200, 50);
+		eliminar.setLocation((x / 8) - (200 - pedirId.getWidth()) / 4, (y / 4) + 50);
+		
+		menu.add(listado);
+		menu.add(mostrar);
+		menu.add(idArmamento);
+		menu.add(pedirId);
+		menu.add(eliminar);
+		
+		return menu;
 	}
 
 	private Usuario validar(String usuario, String contraseña) {
