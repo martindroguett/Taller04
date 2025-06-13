@@ -14,15 +14,14 @@ public interface Sistema {
 	void iniciar();
 	
 	boolean removeArmamento(int id);
-	
+
 	List<Usuario> getUsuarios();
 	
 	List<Dinosaurio> getDinos();
-	
+
 	List<Armamento> getArmas();
 	
 	String getArmamento(int i);
 	
-
 
 }
