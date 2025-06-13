@@ -10,7 +10,7 @@ public class Armamento {
 		this.id = id;
 		this.nombre = nombre;
 		this.tipo = tipo;
-		if (estado.equals("incompleto")) {
+		if (estado.equalsIgnoreCase("completo")) {
 			this.incompleto = true;
 		} else this.incompleto = false;
 	}
@@ -30,5 +30,11 @@ public class Armamento {
 	
 	public boolean estaIncompleto() {
 		return incompleto;
+	}
+	
+	public String toString() {
+		return "[id: " + id+
+				" ; nombre: " + nombre+
+				" ; tipo: " + tipo + "]";
 	}
 }

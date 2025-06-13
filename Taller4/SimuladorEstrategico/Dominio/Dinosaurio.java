@@ -30,4 +30,10 @@ public class Dinosaurio {
 	public boolean estaExtinto() {
 		return extinto;
 	}
+	
+	public String toString() {
+		return "[id: " + id+
+				" ; nombre: " + nombre+
+				" ; tipo: " + tipo + "]";
+	}
 }

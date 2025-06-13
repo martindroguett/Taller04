@@ -38,6 +38,15 @@ public class App {
 			
 			sistema.crearArmamento(id, nombre, tipo, estado);
 		}
+				
+		// para imprimir los completos 
+		int cantArmas = sistema.getArmas().size();
+		for (int i = 0; i<cantArmas; i++) {
+			if (sistema.getArmas().get(i).estaIncompleto() == true) {
+				System.out.println(sistema.getArmamento(i));
+			}
+		}
+		
 		lector.close();
 		
 	}
