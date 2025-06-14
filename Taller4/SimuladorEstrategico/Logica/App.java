@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
 
 public class App {
 	private static Sistema sistema = SistemaImpl.getInstance();
-	private Scanner scanner = new Scanner(System.in);
+	private static Scanner scanner = new Scanner(System.in);
 	
 	public static void main(String[] args) {
 		try {
@@ -23,8 +23,39 @@ public class App {
 		}
 		
 		sistema.iniciar();
+		metodosBorradores();
 		
+	}
+// MÉTODOS Q HAY QUE IMPLEMENTAR EN LA GUI
+	private static void metodosBorradores() {
+		// método para imprimir el listado de armamentos y que el usuario ingrese uno según el id
+		System.out.println("----Armamentos disponibles----");
+		int armamentos = sistema.getArmas().size();
+		for (int i = 0; i<armamentos; i++) {
+			System.out.println(sistema.getArmamento(i));
+		}
+		boolean encontrado = false;
+		do {
+			System.out.print("Ingrese armamento a eliminar: ");
+			encontrado = sistema.removeArmamento(Integer.parseInt(scanner.nextLine()));
+		}while (!encontrado);
+		System.out.println("Armamento eliminado!");
 		
+		// método para imprimir los armamentos completos 
+		int cantArmas = sistema.getArmas().size();
+			for (int i = 0; i<cantArmas; i++) {
+				if (sistema.getArmas().get(i).estaIncompleto() == true) {
+					System.out.println(sistema.getArmamento(i));
+				}
+			}
+		 
+		// método para imprimir las armas incompletas
+		int cantArmasIncompletas = sistema.getArmas().size();
+		for (int i = 0; i<cantArmasIncompletas; i++) {
+			if (!sistema.getArmas().get(i).estaIncompleto()) {
+				System.out.println(sistema.getArmamento(i));
+			}
+		}
 	}
 
 	private static void cargarArmamentos(String file) throws FileNotFoundException {
@@ -37,14 +68,6 @@ public class App {
 			String estado = partes[3];
 			
 			sistema.crearArmamento(id, nombre, tipo, estado);
-		}
-				
-		// para imprimir los completos 
-		int cantArmas = sistema.getArmas().size();
-		for (int i = 0; i<cantArmas; i++) {
-			if (sistema.getArmas().get(i).estaIncompleto() == true) {
-				System.out.println(sistema.getArmamento(i));
-			}
 		}
 		
 		lector.close();

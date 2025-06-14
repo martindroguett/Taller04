@@ -33,8 +33,13 @@ public class Armamento {
 	}
 	
 	public String toString() {
-		return "[id: " + id+
-				" ; nombre: " + nombre+
-				" ; tipo: " + tipo + "]";
+		String estado;
+		if (estaIncompleto()) estado = "Incompleto";
+		else estado = "Completo";
+		return	"\n Id: " + id+
+				"\n Nombre: " + nombre+
+				"\n Tipo: " + tipo +
+				"\n Estado: " + estado +
+				"----------------------";
 	}
 }

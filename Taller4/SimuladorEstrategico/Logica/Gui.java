@@ -10,9 +10,9 @@ import javax.swing.border.*;
 
 public class Gui {
 	private static Sistema sistema = SistemaImpl.getInstance();
-	private static JFrame ventana = new JFrame("Taller 4");
-	private int x = 1000;
-	private int y = 800;
+	private static JFrame ventana = new JFrame("Simulador estátégico");
+	private int x = 900;
+	private int y = 700;
 	private boolean acceso = false;
 
 	public void iniciar() {
@@ -31,7 +31,7 @@ public class Gui {
 		inicioSesion.setLayout(null);
 		inicioSesion.setBackground(new Color(203, 255, 248));
 		
-		JLabel titulo = new JLabel("Bienvenido al Simulador Estratégico Post Guerra!!"); //Creación del título
+		JLabel titulo = new JLabel("Simulador Estratégico Post Guerra!!"); //Creación del título
 		titulo.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		
 		titulo.setSize(titulo.getPreferredSize());
@@ -43,11 +43,11 @@ public class Gui {
 		login.setFont(new Font("Times New Roman", Font.BOLD, 25));
 		
 		login.setSize(login.getPreferredSize());
-		login.setLocation((x - login.getWidth()) / 2, (y - login.getHeight()) / 6);
+		login.setLocation((x - login.getWidth()) / 2, (y - login.getHeight()) / 5);
 	
 //=============================================================================================================
 				
-		JLabel username = new JLabel("Username"); //Creación palabra username
+		JLabel username = new JLabel("Username:"); //Creación palabra username
 		username.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		
 		username.setSize(username.getPreferredSize());
@@ -65,7 +65,7 @@ public class Gui {
 		
 //=============================================================================================================
 		
-		JLabel password = new JLabel("Password"); //Creación palabra password
+		JLabel password = new JLabel("Password:"); //Creación palabra password
 		password.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		
 		password.setSize(password.getPreferredSize());
@@ -133,6 +133,19 @@ public class Gui {
 		
 		bienvenida.setSize(bienvenida.getPreferredSize());
 		bienvenida.setLocation((x - bienvenida.getWidth()) / 2, (y - bienvenida.getHeight()) / 8);
+		
+//=============================================================================================================
+		JButton logOut = new JButton("Log Out");
+		int  altoL= 100;
+		int anchoL = 40;
+		logOut.setBounds((x - altoL -20), 10,  altoL, anchoL);
+		logOut.addActionListener(e -> {
+			ventana.getContentPane().removeAll();
+			ventana.getContentPane().add(panelInicioSesion());
+			ventana.revalidate();
+			ventana.repaint();
+		});
+				
 	
 //=============================================================================================================
 		JButton gestion = new JButton("Gestionar Armamento");
@@ -147,30 +160,67 @@ public class Gui {
 			ventana.repaint();
 		});
 		
+//=======================================================================		
+		JButton mostrar = new JButton("Mostrar prototipos visuales");
+		
+		mostrar.setBounds((x - largo) / 2, (y - (ancho)) / 5+ancho+10, largo, ancho);
+		mostrar.addActionListener(e -> {
+			ventana.getContentPane().removeAll();
+			ventana.getContentPane().add(panelGestionArmamento());
+			ventana.revalidate();
+			ventana.repaint();
+		});
 		menuPrincipal.add(bienvenida);
 		menuPrincipal.add(gestion);
-		
+		menuPrincipal.add(mostrar);
+		menuPrincipal.add(logOut);
 		return menuPrincipal;
 	}
 
+	// GESTION DE ARMAMENTOS
 	private JPanel panelGestionArmamento() {
 		JPanel menu = new JPanel(); //Panel menu
 		menu.setLayout(null);
 		menu.setBackground(new Color(120, 120, 100));
+//=============================================================================================================
+		JButton logOut = new JButton("Log Out");
+		int  altoL= 100;
+		int anchoL = 40;
+		logOut.setBounds((x - altoL -20), 10,  altoL, anchoL);
+		logOut.addActionListener(e -> {
+			ventana.getContentPane().removeAll();
+			ventana.getContentPane().add(panelInicioSesion());
+			ventana.revalidate();
+			ventana.repaint();
+		});
 		
 //=============================================================================================================
 		
 		JPanel listado = new JPanel(); //Panel donde se muestran los armamentos
-		listado.setLayout(null);
-		listado.setSize(500, 600);
-		listado.setLocation((x - 600), (y - 700) / 2 + 100);
+		listado.setLayout(new BoxLayout(listado, BoxLayout.Y_AXIS)); 
+		listado.setBackground(Color.WHITE);
+		
+		listado.setSize(400, 600);
+		listado.setLocation((x - 450), (y - 350) / 2);
 		
 //=============================================================================================================
 		
 		JButton mostrar = new JButton("Mostrar Armamento"); //Botón mostrar armamento
 		mostrar.setSize(200, 50);
 		mostrar.setLocation((x - 450), (y / 8) - 25);
-	
+		listado.setLayout(new BoxLayout(listado, BoxLayout.Y_AXIS)); 
+		
+		mostrar.addActionListener(e->{
+			listado.removeAll();
+			for (int i = 0; i< sistema.getArmas().size();i++) {
+				String arma = sistema.getArmamento(i) + "\n";
+				JLabel armaLabel = new JLabel(arma);
+				listado.add(armaLabel);
+			}
+			listado.revalidate();
+			listado.repaint();
+		});
+		
 //=============================================================================================================
 		
 		JLabel idArmamento = new JLabel("ID Armamento: "); //Label Id Armamento
@@ -190,6 +240,7 @@ public class Gui {
 		eliminar.setSize(200, 50);
 		eliminar.setLocation((x / 8) - (200 - pedirId.getWidth()) / 4, (y / 4) + 50);
 		
+		menu.add(logOut);
 		menu.add(listado);
 		menu.add(mostrar);
 		menu.add(idArmamento);
@@ -198,7 +249,20 @@ public class Gui {
 		
 		return menu;
 	}
+	
+	private JLabel mostrarArmas() {
+		int cantArmas = sistema.getArmas().size();
+		String lista = "";
+		for (int i = 0; i<cantArmas; i++) {
+			lista += sistema.getArmamento(i);
+			lista += "\n";
+		}
+		JLabel listaArmas = new JLabel(lista);
+		
+		return listaArmas;
+	}
 
+// Método para validar el ingreso de los usuarios con los datos guardados
 	private Usuario validar(String usuario, String contraseña) {
 		for (Usuario u: sistema.getUsuarios()) {
 			if (u.getNombre().equals(usuario)) {
@@ -209,7 +273,7 @@ public class Gui {
 		}
 		return null;
 	}
-	
+	// Método para generar la ventana general
 	private void generarFrame() {
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setResizable(false);

@@ -86,8 +86,8 @@ public class SistemaImpl implements Sistema {
 
 	@Override
 	public String getArmamento(int i) {
-		if(armamentos.get(i).estaIncompleto()) return "Armamento completo: " + armamentos.get(i);
-		if (!armamentos.get(i).estaIncompleto()) return "Armamento incompleto: " + armamentos.get(i);
+		if(armamentos.get(i).estaIncompleto()) return armamentos.get(i).toString();
+		if (!armamentos.get(i).estaIncompleto()) return  armamentos.get(i).toString();
 		else return null;
 	}
 	
