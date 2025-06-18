@@ -90,6 +90,31 @@ public class SistemaImpl implements Sistema {
 		if (!armamentos.get(i).estaIncompleto()) return  armamentos.get(i).toString();
 		else return null;
 	}
+
+	@Override
+	public boolean removeDino(int id) {
+		Dinosaurio eliminar = buscarDinosaurio(id);
+		if (eliminar != null) {
+			dinosaurios.remove(eliminar);
+			return true; // SI SE ENCUENTRA RETORNA VERDADERO
+		} 
+		return false; 
+	}
+	
+	private Dinosaurio buscarDinosaurio(int id) {
+		for (Dinosaurio d: dinosaurios) {
+			if(d.getId() == id) return d;
+		}
+		// SI ES QUE NO LO ENCUENTRA RETORNA NULO
+		return null;
+	}
+
+	@Override
+	public String getDinosaurio(int i) {
+		if(dinosaurios.get(i).estaExtinto()) return dinosaurios.get(i).toString();
+		if (!dinosaurios.get(i).estaExtinto()) return  dinosaurios.get(i).toString();
+		else return null;
+	}
 	
 	
 

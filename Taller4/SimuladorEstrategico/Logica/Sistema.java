@@ -22,6 +22,9 @@ public interface Sistema {
 	List<Armamento> getArmas();
 	
 	String getArmamento(int i);
+
+	boolean removeDino(int id);
 	
+	String getDinosaurio(int id);
 
 }
