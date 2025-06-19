@@ -10,7 +10,7 @@ import javax.swing.border.*;
 
 public class Gui {
 	private static Sistema sistema = SistemaImpl.getInstance();
-	private static JFrame ventana = new JFrame("Simulador estátégico");
+	private static JFrame ventana = new JFrame("Simulador estratégico");
 	private int x = 900;
 	private int y = 700;
 	private boolean acceso = false;
@@ -249,7 +249,7 @@ private JPanel panelGestionDinos(Usuario u) {
 	
 //=============================================================================================================
 	
-	JButton eliminar = new JButton("Eliminar Dinosaurio"); //Botón Eliminar armamento
+	JButton eliminar = new JButton("Eliminar Dinosaurio"); //Botón Eliminar Dinosaurio
 	eliminar.setSize(200, 50);
 	eliminar.setLocation((x / 8) - (200 - pedirId.getWidth()) / 4, (y / 4) + 50);
 	eliminar.addActionListener(e -> {
@@ -325,7 +325,7 @@ private JPanel panelGestionDinos(Usuario u) {
 		gestion.setBounds((x - largo) / 2, (y - ancho) / 5, largo, ancho);
 		gestion.addActionListener(e -> {
 			ventana.getContentPane().removeAll();
-			ventana.getContentPane().add(panelGestionArmamento());
+			ventana.getContentPane().add(panelGestionArmamento(u));
 			ventana.revalidate();
 			ventana.repaint();
 		});
@@ -336,7 +336,7 @@ private JPanel panelGestionDinos(Usuario u) {
 		mostrar.setBounds((x - largo) / 2, (y - (ancho)) / 5+ancho+10, largo, ancho);
 		mostrar.addActionListener(e -> {
 			ventana.getContentPane().removeAll();
-			ventana.getContentPane().add(panelGestionArmamento());
+			ventana.getContentPane().add(prototiposVisualesArmas(u));
 			ventana.revalidate();
 			ventana.repaint();
 		});
@@ -346,9 +346,83 @@ private JPanel panelGestionDinos(Usuario u) {
 		menuPrincipal.add(logOut);
 		return menuPrincipal;
 	}
+	
+//MÉTODO PARA MOSTRAR LOS PROTOTIPOS VISUALES DE TECNOLOGÍA BÉLICA
+	private Component prototiposVisualesArmas(Usuario u) {
+		JPanel menu = new JPanel(); //Panel menu
+		menu.setLayout(null);
+		menu.setBackground(new Color(120, 120, 100));
+		
+		JButton logOut = new JButton("Log Out");
+		int  altoL= 100;
+		int anchoL = 40;
+		logOut.setBounds((x - altoL -20), 10,  altoL, anchoL);
+		logOut.addActionListener(e -> {
+			ventana.getContentPane().removeAll();
+			ventana.getContentPane().add(panelInicioSesion());
+			ventana.revalidate();
+			ventana.repaint();
+		});
+		
+		JButton retornar = new JButton("Return");
+		int altoR= 100;
+		int anchoR = 40;
+		retornar.setSize(altoR, anchoR);
+		retornar.setLocation(20, 600);
+		retornar.addActionListener(e -> {
+			ventana.getContentPane().removeAll();
+			ventana.getContentPane().add(panelMenuPrincipalGeneral(u));
+			ventana.revalidate();
+			ventana.repaint();
+		});
+//=============================================================================================================
+		JLabel idArmamento = new JLabel("ID Armamento: "); //Label Id Armamento
+		idArmamento.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		idArmamento.setSize(idArmamento.getPreferredSize());
+		idArmamento.setLocation(20, 40);
+		
+		JTextField pedirId = new JTextField();
+		pedirId.setSize(idArmamento.getWidth(), idArmamento.getHeight() + 5);
+		pedirId.setLocation((x / 8) + 23, (y / 4) + idArmamento.getHeight());
+		
+		JButton generar = new JButton("Generar"); //Botón para generar el armamento
+		generar.setSize(200, 50);
+		generar.setLocation(50,40);
+		JPanel imagenLayout = new JPanel(); //Panel donde se muestran los armamentos
+		imagenLayout.setLayout(new BoxLayout(imagenLayout, BoxLayout.Y_AXIS)); 
+		imagenLayout.setBackground(Color.WHITE);
+		
+		imagenLayout.setSize(400, 600);
+		imagenLayout.setLocation((x - 450), (y - 350) / 2);
+		
+		
+		
+		imagenLayout.setLayout(new BoxLayout(imagenLayout, BoxLayout.Y_AXIS)); 
+		
+		generar.addActionListener(e->{
+			imagenLayout.removeAll();
+			for (int i = 0; i< sistema.getArmas().size();i++) {
+				String arma = sistema.getArmamento(i) + "\n";
+				JLabel armaLabel = new JLabel(arma);
+				imagenLayout.add(armaLabel);
+			}
+			imagenLayout.revalidate();
+			imagenLayout.repaint();
+		});
+		
+		
+		menu.add(logOut);
+		menu.add(retornar);
+		menu.add(idArmamento);
+		menu.add(generar);
+		menu.add(pedirId);
+		menu.add(imagenLayout);
+		
+	return menu;
+}
 
 	// GESTION DE ARMAMENTOS
-	private JPanel panelGestionArmamento() {
+	private JPanel panelGestionArmamento(Usuario u) {
 		JPanel menu = new JPanel(); //Panel menu
 		menu.setLayout(null);
 		menu.setBackground(new Color(120, 120, 100));
@@ -364,6 +438,17 @@ private JPanel panelGestionDinos(Usuario u) {
 			ventana.repaint();
 		});
 		
+		JButton retornar = new JButton("Return");
+		int altoR= 100;
+		int anchoR = 40;
+		retornar.setSize(altoR, anchoR);
+		retornar.setLocation((x / 8) - (200) / 4, (y / 4) + 200);
+		retornar.addActionListener(e -> {
+			ventana.getContentPane().removeAll();
+			ventana.getContentPane().add(panelMenuPrincipalGeneral(u));
+			ventana.revalidate();
+			ventana.repaint();
+		});
 //=============================================================================================================
 		
 		JPanel listado = new JPanel(); //Panel donde se muestran los armamentos
@@ -409,6 +494,33 @@ private JPanel panelGestionDinos(Usuario u) {
 		JButton eliminar = new JButton("Eliminar Armamento"); //Botón Eliminar armamento
 		eliminar.setSize(200, 50);
 		eliminar.setLocation((x / 8) - (200 - pedirId.getWidth()) / 4, (y / 4) + 50);
+		eliminar.addActionListener(e -> {
+			if (pedirId.getText() == null) {
+				JOptionPane.showMessageDialog(null, "Por favor ingrese una id!");
+			} else { 
+				try {
+					Integer.parseInt(pedirId.getText());
+				} catch (NumberFormatException er) {
+					JOptionPane.showMessageDialog(null, "La id que ingresaste no es un numero!");
+					return;
+				}
+				
+				if (sistema.removeArmamento(Integer.parseInt(pedirId.getText()))){
+					listado.removeAll();
+					for (int i = 0; i< sistema.getArmas().size();i++) {
+						String arma = sistema.getArmamento(i) + "\n";
+						JLabel armaLabel = new JLabel(arma);
+						listado.add(armaLabel);
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "No existe un armamento con esa id!");
+				}
+				listado.revalidate();
+				listado.repaint();
+				
+			}
+		});
+		
 		
 		menu.add(logOut);
 		menu.add(listado);
@@ -416,6 +528,7 @@ private JPanel panelGestionDinos(Usuario u) {
 		menu.add(idArmamento);
 		menu.add(pedirId);
 		menu.add(eliminar);
+		menu.add(retornar);
 		
 		return menu;
 	}
