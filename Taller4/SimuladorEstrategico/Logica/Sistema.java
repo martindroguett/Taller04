@@ -21,10 +21,12 @@ public interface Sistema {
 
 	List<Armamento> getArmas();
 	
-	String getArmamento(int i);
+	String getArmamento(int i, Boolean incompleto);
 
 	boolean removeDino(int id);
 	
-	String getDinosaurio(int id);
+	String getDinosaurio(int id, Boolean extinto);
+
+	String getDinosaurioName(int int1);
 
 }

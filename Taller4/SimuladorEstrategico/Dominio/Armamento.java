@@ -36,9 +36,9 @@ public class Armamento {
 		String estado;
 		if (estaIncompleto()) estado = "Incompleto";
 		else estado = "Completo";
-		return	"[id: " + id+
-				" ; nombre: " + nombre+
-				" ; tipo: " + tipo + 
-				" ;estado: " + estado+"]";
+		return	"id: " + id +
+				"\nnombre: " + nombre+
+				"\ntipo: " + tipo + 
+				"\nestado: " + estado;
 	}
 }

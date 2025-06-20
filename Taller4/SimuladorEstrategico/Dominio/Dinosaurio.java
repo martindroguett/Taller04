@@ -32,8 +32,12 @@ public class Dinosaurio {
 	}
 	
 	public String toString() {
-		return "[id: " + id+
-				" ; nombre: " + nombre+
-				" ; tipo: " + tipo + "]";
+		String estado;
+		if (estaExtinto()) estado = "Extinto";
+		else estado = "No extinto";
+		return "id: " + id +
+				"\nnombre: " + nombre +
+				"\ntipo: " + tipo + 
+				"\nestado: " + estado;
 	}
 }

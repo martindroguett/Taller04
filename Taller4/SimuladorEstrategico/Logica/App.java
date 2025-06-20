@@ -32,7 +32,7 @@ public class App {
 		System.out.println("----Armamentos disponibles----");
 		int armamentos = sistema.getArmas().size();
 		for (int i = 0; i<armamentos; i++) {
-			System.out.println(sistema.getArmamento(i));
+			System.out.println(sistema.getArmamento(i, null));
 		}
 		boolean encontrado = false;
 		do {
@@ -45,7 +45,7 @@ public class App {
 		int cantArmas = sistema.getArmas().size();
 			for (int i = 0; i<cantArmas; i++) {
 				if (sistema.getArmas().get(i).estaIncompleto() == true) {
-					System.out.println(sistema.getArmamento(i));
+					System.out.println(sistema.getArmamento(i, null));
 				}
 			}
 		 
@@ -53,7 +53,7 @@ public class App {
 		int cantArmasIncompletas = sistema.getArmas().size();
 		for (int i = 0; i<cantArmasIncompletas; i++) {
 			if (!sistema.getArmas().get(i).estaIncompleto()) {
-				System.out.println(sistema.getArmamento(i));
+				System.out.println(sistema.getArmamento(i, null));
 			}
 		}
 	}

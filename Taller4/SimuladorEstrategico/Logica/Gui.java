@@ -3,10 +3,9 @@ package Logica;
 import Dominio.*;
 
 import java.awt.*;
-
-
 import javax.swing.*;
 import javax.swing.border.*;
+import java.io.IOException;
 
 public class Gui {
 	private static Sistema sistema = SistemaImpl.getInstance();
@@ -125,7 +124,7 @@ public class Gui {
 		return inicioSesion;
 	} //Fin inicio de sesión
 	
-		private Component panelMenuPrincipalArqueologo(Usuario u) {
+	private JPanel panelMenuPrincipalArqueologo(Usuario u) {
 		JPanel menuPrincipal = new JPanel();
 		menuPrincipal.setLayout(null);
 		menuPrincipal.setBackground(new Color(63, 80, 122));
@@ -168,7 +167,7 @@ public class Gui {
 		mostrar.setBounds((x - largo) / 2, (y - (ancho)) / 5+ancho+10, largo, ancho);
 		mostrar.addActionListener(e -> {
 			ventana.getContentPane().removeAll();
-			ventana.getContentPane(); //PENDIENTE
+			ventana.getContentPane().add(panelRepresentacionDinos(u));
 			ventana.revalidate();
 			ventana.repaint();
 		});
@@ -179,116 +178,248 @@ public class Gui {
 		return menuPrincipal;
 	}
 
-private JPanel panelGestionDinos(Usuario u) {
-	JPanel menu = new JPanel(); //Panel menu
-	menu.setLayout(null);
-	menu.setBackground(new Color(120, 120, 100));
-//=============================================================================================================
-	JButton logOut = new JButton("Log Out");
-	int  altoL= 100;
-	int anchoL = 40;
-	logOut.setBounds((x - altoL -20), 10,  altoL, anchoL);
-	logOut.addActionListener(e -> {
-		ventana.getContentPane().removeAll();
-		ventana.getContentPane().add(panelInicioSesion());
-		ventana.revalidate();
-		ventana.repaint();
-	});
-	
-//============================================================================================================= //NUEVOOOO
-	JButton retornar = new JButton("Return");
-	int altoR= 100;
-	int anchoR = 40;
-	retornar.setSize(altoR, anchoR);
-	retornar.setLocation((x / 8) - (200) / 4, (y / 4) + 200);
-	retornar.addActionListener(e -> {
-		ventana.getContentPane().removeAll();
-		ventana.getContentPane().add(panelMenuPrincipalArqueologo(u));
-		ventana.revalidate();
-		ventana.repaint();
-	});
-//=============================================================================================================
-	
-	JPanel listado = new JPanel(); //Panel donde se muestran los dinosaurios
-	listado.setLayout(new BoxLayout(listado, BoxLayout.Y_AXIS)); 
-	listado.setBackground(Color.WHITE);
-	
-	listado.setSize(400, 600);
-	listado.setLocation((x - 450), (y - 350) / 2);
-	
-//=============================================================================================================
-	
-	JButton mostrar = new JButton("Mostrar Dinosaurios"); //Botón mostrar dinosaurios
-	mostrar.setSize(200, 50);
-	mostrar.setLocation((x - 450), (y / 8) - 25);
-	listado.setLayout(new BoxLayout(listado, BoxLayout.Y_AXIS)); 
-	
-	mostrar.addActionListener(e->{
-		listado.removeAll();
-		for (int i = 0; i< sistema.getDinos().size();i++) {
-			String dino = sistema.getDinosaurio(i) + "\n";
-			JLabel dinoLabel = new JLabel(dino);
-			listado.add(dinoLabel);
-		}
-		listado.revalidate();
-		listado.repaint();
-	});
-	
-//=============================================================================================================
-	
-	JLabel idDino = new JLabel("ID Dinosaurio: "); //Label Id Dinosaurio
-	idDino.setFont(new Font("Times New Roman", Font.BOLD, 15));
-	idDino.setSize(idDino.getPreferredSize());
-	idDino.setLocation((x / 8) + 25, (y / 4));
-	
-//=============================================================================================================
-	
-	JTextField pedirId = new JTextField();
-	pedirId.setSize(idDino.getWidth(), idDino.getHeight() + 5);
-	pedirId.setLocation((x / 8) + 23, (y / 4) + idDino.getHeight());
-	
-//=============================================================================================================
-	
-	JButton eliminar = new JButton("Eliminar Dinosaurio"); //Botón Eliminar Dinosaurio
-	eliminar.setSize(200, 50);
-	eliminar.setLocation((x / 8) - (200 - pedirId.getWidth()) / 4, (y / 4) + 50);
-	eliminar.addActionListener(e -> {
-		if (pedirId.getText() == null) {
-			JOptionPane.showMessageDialog(null, "Por favor ingrese una id!");
-		} else { 
-			try {
-				Integer.parseInt(pedirId.getText());
-			} catch (NumberFormatException er) {
-				JOptionPane.showMessageDialog(null, "La id que ingresaste no es un numero!");
-				return;
-			}
-			
-			if (sistema.removeDino(Integer.parseInt(pedirId.getText()))){
-				listado.removeAll();
-				for (int i = 0; i< sistema.getDinos().size();i++) {
-					String dino = sistema.getDinosaurio(i) + "\n";
+	private JPanel panelRepresentacionDinos(Usuario u) {
+		JPanel menu = new JPanel(); //Panel menu
+		menu.setLayout(null);
+		menu.setBackground(new Color(120, 120, 100));
+	//=============================================================================================================
+		JButton logOut = new JButton("Log Out");
+		int  altoL= 100;
+		int anchoL = 40;
+		logOut.setBounds((x - altoL -20), 10,  altoL, anchoL);
+		logOut.addActionListener(e -> {
+			ventana.getContentPane().removeAll();
+			ventana.getContentPane().add(panelInicioSesion());
+			ventana.revalidate();
+			ventana.repaint();
+		});
+		
+	//============================================================================================================= //NUEVOOOO
+		JButton retornar = new JButton("Return");
+		int altoR= 100;
+		int anchoR = 40;
+		retornar.setSize(altoR, anchoR);
+		retornar.setLocation((x / 8) - (325) / 4, y - 75);
+		retornar.addActionListener(e -> {
+			ventana.getContentPane().removeAll();
+			ventana.getContentPane().add(panelMenuPrincipalArqueologo(u));
+			ventana.revalidate();
+			ventana.repaint();
+		});
+	//=============================================================================================================
+		JPanel listado = new JPanel(); //Panel donde se muestran los dinosaurios
+		listado.setLayout(new BoxLayout(listado, BoxLayout.Y_AXIS)); 
+		listado.setBackground(Color.WHITE);
+		
+		listado.setSize(400, 600);
+		listado.setLocation((x - 450), (y - 350) / 2);
+		
+	//=============================================================================================================
+		JButton mostrarE = new JButton("Mostrar Extintos"); //Botón mostrar dinosaurios extintos
+		mostrarE.setSize(200, 50);
+		mostrarE.setLocation((x - 450), (y / 8) - 25);
+		listado.setLayout(new BoxLayout(listado, BoxLayout.Y_AXIS)); 
+		
+		mostrarE.addActionListener(e->{
+			listado.removeAll();
+			for (int i = 0; i< sistema.getDinos().size();i++) {
+				String dino = sistema.getDinosaurio(i, true);
+				if (dino != null) {
+					dino += "\n";
 					JLabel dinoLabel = new JLabel(dino);
 					listado.add(dinoLabel);
 				}
-			} else {
-				JOptionPane.showMessageDialog(null, "No existe un dinosaurio con esa id!");
 			}
 			listado.revalidate();
 			listado.repaint();
-			
-		}
-	});
-	
-	menu.add(logOut);
-	menu.add(listado);
-	menu.add(mostrar);
-	menu.add(idDino);
-	menu.add(pedirId);
-	menu.add(eliminar);
-	menu.add(retornar);
-	
-	return menu;
+		});
+		
+		JButton mostrarNE = new JButton("Mostrar No Extintos"); //Botón mostrar dinosaurios no extintos
+		mostrarNE.setSize(200, 50);
+		mostrarNE.setLocation((x - 450), (y / 8) + 25);
+		listado.setLayout(new BoxLayout(listado, BoxLayout.Y_AXIS)); 
+		
+		mostrarNE.addActionListener(e->{
+			listado.removeAll();
+			for (int i = 0; i< sistema.getDinos().size();i++) {
+				String dino = sistema.getDinosaurio(i, false);
+				if (dino != null) {
+					dino += "\n";
+					JLabel dinoLabel = new JLabel(dino);
+					listado.add(dinoLabel);
+				}
+			}
+			listado.revalidate();
+			listado.repaint();
+		});
+		JLabel idDino = new JLabel("ID Dinosaurio: "); //Label Id Dinosaurio
+		idDino.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		idDino.setSize(idDino.getPreferredSize());
+		idDino.setLocation(25, 50);
+		
+	//=============================================================================================================
+		
+		JTextField pedirId = new JTextField();
+		pedirId.setSize(idDino.getWidth(), idDino.getHeight() + 5);
+		pedirId.setLocation(23, 50 + idDino.getHeight());
+		
+	//=============================================================================================================
+		
+		JButton ver = new JButton("Ver Dinosaurio"); //Botón ver Dinosaurio
+		ver.setSize(150, 40);
+		ver.setLocation(23, 100);
+		ver.addActionListener(e -> {
+			if (pedirId.getText() == null) {
+				JOptionPane.showMessageDialog(null, "Por favor ingrese una id!");
+			} else { 
+				try {
+					Integer.parseInt(pedirId.getText());
+				} catch (NumberFormatException er) {
+					JOptionPane.showMessageDialog(null, "La id que ingresaste no es un numero!");
+					return;
+				}
+				String dinoNombre = sistema.getDinosaurioName(Integer.parseInt(pedirId.getText()));
+				if (dinoNombre != null) {
+					try {
+						ImagePanel image = new ImagePanel("images/" + dinoNombre + ".png", 400, 400);
+						image.setBounds(25, 150, 400, 400);
+						menu.add(image, 0);
+						menu.revalidate();
+						menu.repaint();
+					} catch (IOException er) { //Si llega aca no existe la imagen del dino, pero si el dino
+						DrawPanel dibujo = new DrawPanel(dinoNombre, 400, 400);
+						dibujo.setBounds(25, 150, 400, 400);
+						menu.add(dibujo, 0);
+						menu.revalidate();
+						menu.repaint();
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "No existe un dinosaurio con esa id!");
+				}
+			}
+		});
+
+		menu.add(logOut);
+		menu.add(retornar);
+		menu.add(listado);
+		menu.add(mostrarE);
+		menu.add(mostrarNE);
+		menu.add(idDino);
+		menu.add(pedirId);
+		menu.add(ver);
+		return menu;
 	}
+
+	private JPanel panelGestionDinos(Usuario u) {
+		JPanel menu = new JPanel(); //Panel menu
+		menu.setLayout(null);
+		menu.setBackground(new Color(120, 120, 100));
+	//=============================================================================================================
+		JButton logOut = new JButton("Log Out");
+		int  altoL= 100;
+		int anchoL = 40;
+		logOut.setBounds((x - altoL -20), 10,  altoL, anchoL);
+		logOut.addActionListener(e -> {
+			ventana.getContentPane().removeAll();
+			ventana.getContentPane().add(panelInicioSesion());
+			ventana.revalidate();
+			ventana.repaint();
+		});
+		
+	//============================================================================================================= //NUEVOOOO
+		JButton retornar = new JButton("Return");
+		int altoR= 100;
+		int anchoR = 40;
+		retornar.setSize(altoR, anchoR);
+		retornar.setLocation((x / 8) - (200) / 4, (y / 4) + 200);
+		retornar.addActionListener(e -> {
+			ventana.getContentPane().removeAll();
+			ventana.getContentPane().add(panelMenuPrincipalArqueologo(u));
+			ventana.revalidate();
+			ventana.repaint();
+		});
+	//=============================================================================================================
+		
+		JPanel listado = new JPanel(); //Panel donde se muestran los dinosaurios
+		listado.setLayout(new BoxLayout(listado, BoxLayout.Y_AXIS)); 
+		listado.setBackground(Color.WHITE);
+		
+		listado.setSize(400, 600);
+		listado.setLocation((x - 450), (y - 350) / 2);
+		
+	//=============================================================================================================
+		
+		JButton mostrar = new JButton("Mostrar Dinosaurios"); //Botón mostrar dinosaurios
+		mostrar.setSize(200, 50);
+		mostrar.setLocation((x - 450), (y / 8) - 25);
+		listado.setLayout(new BoxLayout(listado, BoxLayout.Y_AXIS)); 
+		
+		mostrar.addActionListener(e->{
+			listado.removeAll();
+			for (int i = 0; i< sistema.getDinos().size();i++) {
+				String dino = sistema.getDinosaurio(i, null) + "\n";
+				JLabel dinoLabel = new JLabel(dino);
+				listado.add(dinoLabel);
+			}
+			listado.revalidate();
+			listado.repaint();
+		});
+		
+	//=============================================================================================================
+		
+		JLabel idDino = new JLabel("ID Dinosaurio: "); //Label Id Dinosaurio
+		idDino.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		idDino.setSize(idDino.getPreferredSize());
+		idDino.setLocation((x / 8) + 25, (y / 4));
+		
+	//=============================================================================================================
+		
+		JTextField pedirId = new JTextField();
+		pedirId.setSize(idDino.getWidth(), idDino.getHeight() + 5);
+		pedirId.setLocation((x / 8) + 23, (y / 4) + idDino.getHeight());
+		
+	//=============================================================================================================
+		
+		JButton eliminar = new JButton("Eliminar Dinosaurio"); //Botón Eliminar Dinosaurio
+		eliminar.setSize(200, 50);
+		eliminar.setLocation((x / 8) - (200 - pedirId.getWidth()) / 4, (y / 4) + 50);
+		eliminar.addActionListener(e -> {
+			if (pedirId.getText() == null) {
+				JOptionPane.showMessageDialog(null, "Por favor ingrese una id!");
+			} else { 
+				try {
+					Integer.parseInt(pedirId.getText());
+				} catch (NumberFormatException er) {
+					JOptionPane.showMessageDialog(null, "La id que ingresaste no es un numero!");
+					return;
+				}
+				
+				if (sistema.removeDino(Integer.parseInt(pedirId.getText()))){
+					listado.removeAll();
+					for (int i = 0; i< sistema.getDinos().size();i++) {
+						String dino = sistema.getDinosaurio(i, null) + "\n";
+						JLabel dinoLabel = new JLabel(dino);
+						listado.add(dinoLabel);
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "No existe un dinosaurio con esa id!");
+				}
+				listado.revalidate();
+				listado.repaint();
+				
+			}
+		});
+		
+		menu.add(logOut);
+		menu.add(listado);
+		menu.add(mostrar);
+		menu.add(idDino);
+		menu.add(pedirId);
+		menu.add(eliminar);
+		menu.add(retornar);
+		
+		return menu;
+		}
 
 //-------------------------------------------------------------------------------------------------------------
 	
@@ -348,7 +479,7 @@ private JPanel panelGestionDinos(Usuario u) {
 	}
 	
 //MÉTODO PARA MOSTRAR LOS PROTOTIPOS VISUALES DE TECNOLOGÍA BÉLICA
-	private Component prototiposVisualesArmas(Usuario u) {
+	private JPanel prototiposVisualesArmas(Usuario u) {
 		JPanel menu = new JPanel(); //Panel menu
 		menu.setLayout(null);
 		menu.setBackground(new Color(120, 120, 100));
@@ -402,7 +533,7 @@ private JPanel panelGestionDinos(Usuario u) {
 		generar.addActionListener(e->{
 			imagenLayout.removeAll();
 			for (int i = 0; i< sistema.getArmas().size();i++) {
-				String arma = sistema.getArmamento(i) + "\n";
+				String arma = sistema.getArmamento(i, null) + "\n";
 				JLabel armaLabel = new JLabel(arma);
 				imagenLayout.add(armaLabel);
 			}
@@ -468,7 +599,8 @@ private JPanel panelGestionDinos(Usuario u) {
 		mostrar.addActionListener(e->{
 			listado.removeAll();
 			for (int i = 0; i< sistema.getArmas().size();i++) {
-				String arma = sistema.getArmamento(i) + "\n";
+				String arma = sistema.getArmamento(i, null) + "\n";
+				System.out.println(arma);
 				JLabel armaLabel = new JLabel(arma);
 				listado.add(armaLabel);
 			}
@@ -508,7 +640,7 @@ private JPanel panelGestionDinos(Usuario u) {
 				if (sistema.removeArmamento(Integer.parseInt(pedirId.getText()))){
 					listado.removeAll();
 					for (int i = 0; i< sistema.getArmas().size();i++) {
-						String arma = sistema.getArmamento(i) + "\n";
+						String arma = sistema.getArmamento(i, null) + "\n";
 						JLabel armaLabel = new JLabel(arma);
 						listado.add(armaLabel);
 					}
@@ -531,18 +663,6 @@ private JPanel panelGestionDinos(Usuario u) {
 		menu.add(retornar);
 		
 		return menu;
-	}
-	
-	private JLabel mostrarArmas() {
-		int cantArmas = sistema.getArmas().size();
-		String lista = "";
-		for (int i = 0; i<cantArmas; i++) {
-			lista += sistema.getArmamento(i);
-			lista += "\n";
-		}
-		JLabel listaArmas = new JLabel(lista);
-		
-		return listaArmas;
 	}
 
 // Método para validar el ingreso de los usuarios con los datos guardados

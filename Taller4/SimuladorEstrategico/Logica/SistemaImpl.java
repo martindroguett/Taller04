@@ -85,9 +85,10 @@ public class SistemaImpl implements Sistema {
 	}
 
 	@Override
-	public String getArmamento(int i) {
-		if(armamentos.get(i).estaIncompleto()) return armamentos.get(i).toString();
-		if (!armamentos.get(i).estaIncompleto()) return  armamentos.get(i).toString();
+	public String getArmamento(int i, Boolean incompleto) {
+		if (incompleto == null) return armamentos.get(i).toString();
+		if(armamentos.get(i).estaIncompleto() && incompleto) return armamentos.get(i).toString();
+		if (!armamentos.get(i).estaIncompleto() && !incompleto) return  armamentos.get(i).toString();
 		else return null;
 	}
 
@@ -105,17 +106,24 @@ public class SistemaImpl implements Sistema {
 		for (Dinosaurio d: dinosaurios) {
 			if(d.getId() == id) return d;
 		}
-		// SI ES QUE NO LO ENCUENTRA RETORNA NULO
+		// SI ES QUE NO LO ENCUENTRA RETORNA NULOs
 		return null;
 	}
 
 	@Override
-	public String getDinosaurio(int i) {
-		if(dinosaurios.get(i).estaExtinto()) return dinosaurios.get(i).toString();
-		if (!dinosaurios.get(i).estaExtinto()) return  dinosaurios.get(i).toString();
+	public String getDinosaurio(int i, Boolean extinto) {
+		if (extinto == null) return dinosaurios.get(i).toString();
+		if(dinosaurios.get(i).estaExtinto() && extinto) return dinosaurios.get(i).toString();
+		if (!dinosaurios.get(i).estaExtinto() && !extinto) return  dinosaurios.get(i).toString();
 		else return null;
 	}
-	
-	
+
+	@Override
+	public String getDinosaurioName(int id) {
+		Dinosaurio dino = buscarDinosaurio(id);
+		if (dino != null) {
+			return dino.getNombre();
+		} return null;
+	}	
 
 }
