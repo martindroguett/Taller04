@@ -532,7 +532,7 @@ public class Gui {
 		mostrarC.addActionListener(e->{
 			listado.removeAll();
 			for (int i = 0; i< sistema.getArmas().size();i++) {
-				String arma = sistema.getArmamento(i, null);
+				String arma = sistema.getArmamento(i, true);
 				if (arma != null) {
 					arma += "\n";
 					JLabel armaLabel = new JLabel(arma);
