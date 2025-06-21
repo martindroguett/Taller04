@@ -108,14 +108,65 @@ public class DrawPanel extends JPanel{
 	    }
 	    
 	    if (dibujo.equals("Tanque")) {
-	    	g.setColor(new Color(0, 105, 92)); // parte superior
-	    	g.fillOval(width / 2 + 40, height / 2 - 125, 80, 80);
-	    	g.fillOval(width / 2 + 40, height / 2 - 100, 150, 60);
+	    	g.setColor(new Color(0, 105, 92)); 
+	    	int centroX = width / 2;
+            int centroY = height / 2;
+
+            
+            g.setColor(new Color(46, 125, 50)); 
+            g.fillRoundRect(centroX - 120, centroY, 240, 60, 20, 20);
+
+            g.setColor(new Color(56, 142, 60));
+            g.fillRoundRect(centroX - 60, centroY - 50, 120, 50, 20, 20);
+
+         
+            g.setColor(new Color(0, 77, 64)); 
+            int diametro = 40;
+            int yRuedas = centroY + 50;
+            g.fillOval(centroX - 90, yRuedas, diametro, diametro);
+            g.fillOval(centroX - 40, yRuedas, diametro, diametro);
+            g.fillOval(centroX + 10, yRuedas, diametro, diametro);
+            g.fillOval(centroX + 60, yRuedas, diametro, diametro);
+            
+            g.setColor(Color.BLACK);
+            g.drawRoundRect(centroX - 120, centroY, 240, 60, 20, 20);
+            g.drawRoundRect(centroX - 60, centroY - 50, 120, 50, 20, 20);
+           
+            g.drawOval(centroX - 90, yRuedas, diametro, diametro);
+            g.drawOval(centroX - 40, yRuedas, diametro, diametro);
+            g.drawOval(centroX + 10, yRuedas, diametro, diametro);
+            g.drawOval(centroX + 60, yRuedas, diametro, diametro);
+
+   
+	    	
 	    }
 	    
 	    if (dibujo.equals("Granada")) {
-	    	g.setColor(new Color(27, 94, 32)); // cuerpo
-	    	g.fillOval(width / 2 + 40, height / 2 - 100, 150, 60);
+	    	g.setColor(new Color(17, 122, 101)); 
+	    	int centroX = width / 2;
+	    	int centroY = height / 2; 
+	    	int diametro = 200;
+	    	
+	    	int x = centroX - (diametro/2);
+	    	int y = centroY -(diametro/2);
+	    	
+	    	g.fillOval(x,y,diametro,diametro+20);
+	    	
+	    	g.setColor(new Color(189, 195, 199));
+	    	g.drawOval(x+40, y+5,80,80);
+	    	
+	    	g.setColor(new Color(144, 148, 151));
+	    	g.fillRect(centroX-35, y-15, 70, 20);
+	    	g.setColor(new Color(121, 125, 127));
+	    	g.fillRect(centroX-60, y-65, 120, 50);
+	    	
+	    	g.setColor(new Color(11, 83, 69));
+	    	g.drawLine(x, centroY, diametro+100, centroY);
+	    	g.drawLine(x+10, centroY+50, diametro+90, centroY+50);
+	    	g.drawLine(x+20, centroY-50, diametro+80, centroY-50);
+	    	g.drawLine(centroX-30, y+5, centroX-30, diametro+110);
+	    	g.drawLine(centroX+30, y+5, centroX+30, diametro+110);
+	    	
 	    }
 	    if (dibujo.equals("Pistola")) {
 	    	g.setColor(new Color(158, 158, 158)); // boca de la pistola
