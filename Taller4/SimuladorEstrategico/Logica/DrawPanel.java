@@ -106,5 +106,38 @@ public class DrawPanel extends JPanel{
 	        
 	        g.drawLine(width / 2 + 70, height / 2 - 55, width / 2 + 180, height / 2 - 55); //Boca
 	    }
+	    
+	    if (dibujo.equals("Tanque")) {
+	    	g.setColor(new Color(0, 105, 92)); // parte superior
+	    	g.fillOval(width / 2 + 40, height / 2 - 125, 80, 80);
+	    	g.fillOval(width / 2 + 40, height / 2 - 100, 150, 60);
+	    }
+	    
+	    if (dibujo.equals("Granada")) {
+	    	g.setColor(new Color(27, 94, 32)); // cuerpo
+	    	g.fillOval(width / 2 + 40, height / 2 - 100, 150, 60);
+	    }
+	    if (dibujo.equals("Pistola")) {
+	    	g.setColor(new Color(158, 158, 158)); // boca de la pistola
+	    	g.fillRect(50, 80, 240, 60);
+	    	
+	    	g.setColor(new Color(117, 117, 117));
+	    	g.drawLine(60, 120, 290, 120);
+	    	g.drawLine(70, 110, 80,80);
+	    	g.drawLine(80, 110,90,80);
+	    	g.drawLine(90, 110, 100,80);
+	    	g.drawLine(100, 110, 110,80);
+	    	
+	    	g.setColor(new Color(117, 117, 117));
+	    	g.fillRect(290, 95, 10, 35);
+	    	
+	    	g.setColor(new Color(117, 117, 117));
+	    	g.fillRect(60, 140, 60, 110);
+	    	
+	    	g.setColor(new Color(78, 52, 46));
+	    	g.fillRect(70, 150, 40,80);
+	    }
+	    
     }
+    
 }
