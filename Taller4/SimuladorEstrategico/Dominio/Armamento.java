@@ -4,15 +4,15 @@ public class Armamento {
 	private int id;
 	private String nombre;
 	private String tipo;
-	private boolean incompleto;
+	private boolean completo;
 	
 	public Armamento(int id, String nombre, String tipo, String estado) {
 		this.id = id;
 		this.nombre = nombre;
 		this.tipo = tipo;
 		if (estado.equalsIgnoreCase("completo")) {
-			this.incompleto = true;
-		} else this.incompleto = false;
+			this.completo = true;
+		} else this.completo = false;
 	}
 
 
@@ -29,16 +29,16 @@ public class Armamento {
 	}
 	
 	public boolean estaIncompleto() {
-		return incompleto;
+		return completo;
 	}
 	
 	public String toString() {
 		String estado;
-		if (estaIncompleto()) estado = "Incompleto";
-		else estado = "Completo";
+		if (estaIncompleto()) estado = "Completo";
+		else estado = "Incompleto";
 		return	"id: " + id +
-				"\nnombre: " + nombre+
-				"\ntipo: " + tipo + 
-				"\nestado: " + estado;
+				"\n; nombre: " + nombre+
+				"\n; tipo: " + tipo + 
+				"\n; estado: " + estado;
 	}
 }

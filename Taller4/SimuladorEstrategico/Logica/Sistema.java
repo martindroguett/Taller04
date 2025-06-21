@@ -27,6 +27,8 @@ public interface Sistema {
 	
 	String getDinosaurio(int id, Boolean extinto);
 
-	String getDinosaurioName(int int1);
+	String getDinosaurioName(int id);
+
+	String getArmaTipo(int id);
 
 }

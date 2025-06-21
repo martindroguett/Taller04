@@ -67,7 +67,7 @@ public class SistemaImpl implements Sistema {
 	// MÉTODO PARA ELIMINAR EL ARMEMENTO DE LA LISTA DE ARMAMENTOS
 	@Override
 	public boolean removeArmamento(int id) {
-		Armamento eliminar = buscarAmamento(id);
+		Armamento eliminar = buscarArmamento(id);
 		if (eliminar != null) {
 			armamentos.remove(eliminar);
 			return true; // SI SE ENCUENTRA RETORNA VERDADERO
@@ -76,7 +76,7 @@ public class SistemaImpl implements Sistema {
 	}
 
 	// MÉTODO PARA BUSCAR EL ARMAMENTO SEGÚN EL ID 
-	private Armamento buscarAmamento(int id) {
+	private Armamento buscarArmamento(int id) {
 		for (Armamento a: armamentos) {
 			if(a.getId() == id) return a;
 		}
@@ -85,10 +85,10 @@ public class SistemaImpl implements Sistema {
 	}
 
 	@Override
-	public String getArmamento(int i, Boolean incompleto) {
-		if (incompleto == null) return armamentos.get(i).toString();
-		if(armamentos.get(i).estaIncompleto() && incompleto) return armamentos.get(i).toString();
-		if (!armamentos.get(i).estaIncompleto() && !incompleto) return  armamentos.get(i).toString();
+	public String getArmamento(int i, Boolean completo) {
+		if (completo == null) return armamentos.get(i).toString();
+		if(armamentos.get(i).estaIncompleto() && completo) return armamentos.get(i).toString();
+		if (!armamentos.get(i).estaIncompleto() && !completo) return  armamentos.get(i).toString();
 		else return null;
 	}
 
@@ -124,6 +124,15 @@ public class SistemaImpl implements Sistema {
 		if (dino != null) {
 			return dino.getNombre();
 		} return null;
+	}
+
+	@Override
+	public String getArmaTipo(int id) {
+		Armamento arma = buscarArmamento(id);
+		if (arma != null) {
+			return arma.tipo();
+		} return null;
+		
 	}	
 
 }

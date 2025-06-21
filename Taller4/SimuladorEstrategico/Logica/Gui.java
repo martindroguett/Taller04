@@ -510,46 +510,101 @@ public class Gui {
 		JLabel idArmamento = new JLabel("ID Armamento: "); //Label Id Armamento
 		idArmamento.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		idArmamento.setSize(idArmamento.getPreferredSize());
-		idArmamento.setLocation(20, 40);
+		idArmamento.setLocation(25, 50);
 		
 		JTextField pedirId = new JTextField();
 		pedirId.setSize(idArmamento.getWidth(), idArmamento.getHeight() + 5);
-		pedirId.setLocation((x / 8) + 23, (y / 4) + idArmamento.getHeight());
+		pedirId.setLocation(23, 50 + idArmamento.getHeight());
 		
-		JButton generar = new JButton("Generar"); //Botón para generar el armamento
-		generar.setSize(200, 50);
-		generar.setLocation(50,40);
-		JPanel imagenLayout = new JPanel(); //Panel donde se muestran los armamentos
-		imagenLayout.setLayout(new BoxLayout(imagenLayout, BoxLayout.Y_AXIS)); 
-		imagenLayout.setBackground(Color.WHITE);
+// ================================================================================================================
+		JPanel listado = new JPanel(); //Panel donde se muestra la lista de armamentos
+		listado.setLayout(new BoxLayout(listado, BoxLayout.Y_AXIS)); 
+		listado.setBackground(Color.WHITE);
 		
-		imagenLayout.setSize(400, 600);
-		imagenLayout.setLocation((x - 450), (y - 350) / 2);
+		listado.setSize(400, 600);
+		listado.setLocation((x - 450), (y - 350) / 2);
 		
+		JButton mostrarC = new JButton("Generar prototipos completos"); //Botón mostrar prototipos completos
+		mostrarC.setSize(mostrarC.getPreferredSize());
+		mostrarC.setLocation((x - 450), (y / 8) - 25);
+		listado.setLayout(new BoxLayout(listado, BoxLayout.Y_AXIS)); 
 		
-		
-		imagenLayout.setLayout(new BoxLayout(imagenLayout, BoxLayout.Y_AXIS)); 
-		
-		generar.addActionListener(e->{
-			imagenLayout.removeAll();
+		mostrarC.addActionListener(e->{
+			listado.removeAll();
 			for (int i = 0; i< sistema.getArmas().size();i++) {
-				String arma = sistema.getArmamento(i, null) + "\n";
-				JLabel armaLabel = new JLabel(arma);
-				imagenLayout.add(armaLabel);
+				String arma = sistema.getArmamento(i, null);
+				if (arma != null) {
+					arma += "\n";
+					JLabel armaLabel = new JLabel(arma);
+					listado.add(armaLabel);
+				}
 			}
-			imagenLayout.revalidate();
-			imagenLayout.repaint();
+			listado.revalidate();
+			listado.repaint();
 		});
 		
+		JButton mostrarI = new JButton("Generar prototipos incompletos"); //Botón mostrar prototipos incompletos
+		mostrarI.setSize(mostrarI.getPreferredSize());
+		mostrarI.setLocation((x - 450), (y / 8) + 25);
+		listado.setLayout(new BoxLayout(listado, BoxLayout.Y_AXIS)); 
+		
+		mostrarI.addActionListener(e->{
+			listado.removeAll();
+			for (int i = 0; i< sistema.getArmas().size();i++) {
+				String arma = sistema.getArmamento(i, false);
+				if (arma != null) {
+					arma += "\n";
+					JLabel armaLabel = new JLabel(arma);
+					listado.add(armaLabel);
+				}
+			}
+			listado.revalidate();
+			listado.repaint();
+		});
+		
+		JButton generar = new JButton("Generar"); //Botón para generar el armamento
+		generar.setSize(150, 40);
+		generar.setLocation(23, 100);
+		generar.addActionListener(e -> {
+			if (pedirId.getText() == null) {
+				JOptionPane.showMessageDialog(null, "Por favor ingrese una id!");
+			} else { 
+				try {
+					Integer.parseInt(pedirId.getText());
+				} catch (NumberFormatException er) {
+					JOptionPane.showMessageDialog(null, "La id que ingresaste no es un numero!");
+					return;
+				}
+				String armaTipo = sistema.getArmaTipo(Integer.parseInt(pedirId.getText()));
+				if (armaTipo != null) {
+					try {
+						ImagePanel image = new ImagePanel("images/" + armaTipo + ".png", 400, 400);
+						image.setBounds(25, 150, 400, 400);
+						menu.add(image, 0);
+						menu.revalidate();
+						menu.repaint();
+					} catch (IOException er) { 
+						DrawPanel dibujo = new DrawPanel(armaTipo, 400, 400);
+						dibujo.setBounds(25, 150, 400, 400);
+						menu.add(dibujo, 0);
+						menu.revalidate();
+						menu.repaint();
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "No existe un armamento con esa id!");
+				}
+			}
+		});
 		
 		menu.add(logOut);
 		menu.add(retornar);
 		menu.add(idArmamento);
 		menu.add(generar);
 		menu.add(pedirId);
-		menu.add(imagenLayout);
-		
-	return menu;
+		menu.add(listado);
+		menu.add(mostrarI);
+		menu.add(mostrarC);
+		return menu;
 }
 
 	// GESTION DE ARMAMENTOS

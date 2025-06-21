@@ -36,8 +36,8 @@ public class Dinosaurio {
 		if (estaExtinto()) estado = "Extinto";
 		else estado = "No extinto";
 		return "id: " + id +
-				"\nnombre: " + nombre +
-				"\ntipo: " + tipo + 
-				"\nestado: " + estado;
+				"\n; nombre: " + nombre +
+				"\n; tipo: " + tipo + 
+				"\n; estado: " + estado;
 	}
 }
