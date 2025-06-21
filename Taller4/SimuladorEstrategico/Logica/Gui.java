@@ -14,16 +14,22 @@ public class Gui {
 	private int y = 700;
 	private boolean acceso = false;
 
+	/**
+	 * Crea la ventana principal de la interfaz gráfica.
+	 */
 	public void iniciar() {
 			generarFrame();
 		
 			ventana.getContentPane().add(panelInicioSesion());
 		
 			ventana.setVisible(true);
-			
-			System.out.println("salió");
 	}
-	
+	/**
+	 * Crea y devuelve el panel de inicio de sesión en el cual se agregan las componentes necesarias
+	 * para que el usuario ingrese su nombre de usuario y contraseña, además de mostrar el título del programa.
+	 * 
+	 * @return El panel de inicio de sesión con las componentes necesarias.
+	 */
 	private JPanel panelInicioSesion() {
 		
 		JPanel inicioSesion = new JPanel();
@@ -90,18 +96,19 @@ public class Gui {
 		entrar.setBounds( (x - largo) / 2, (y + 6 * ancho) / 3, largo, ancho);
 		entrar.setBackground(Color.CYAN);
 		entrar.addActionListener(e -> {
-			Usuario user = validar(usuario.getText(), new String(contraseña.getPassword()));
+			String userName = validar(usuario.getText(), new String(contraseña.getPassword()));
+			String rol = sistema.getRol(userName);
 			
-			if(user != null) {
+			if(userName != null) {
 				JOptionPane.showMessageDialog(null, "Acceso Correcto!", "Aceptar!", JOptionPane.INFORMATION_MESSAGE);
 				ventana.getContentPane().removeAll();
 				
-				if (user.esGeneral()) {
-					ventana.getContentPane().add(panelMenuPrincipalGeneral(user));
+				if (rol.equals("general")) {
+					ventana.getContentPane().add(panelMenuPrincipalGeneral(userName));
 					ventana.revalidate();
 					ventana.repaint();
 				} else {
-					ventana.getContentPane().add(panelMenuPrincipalArqueologo(user));
+					ventana.getContentPane().add(panelMenuPrincipalArqueologo(userName));
 					ventana.revalidate();
 					ventana.repaint();
 				}
@@ -122,14 +129,20 @@ public class Gui {
 		inicioSesion.add(entrar);
 		
 		return inicioSesion;
-	} //Fin inicio de sesión
+	} 
 	
-	private JPanel panelMenuPrincipalArqueologo(Usuario u) {
+	/**
+	 * Crea y devuelve el panel de menú principal cuando el rol del usuario ingresado sea igual a <code>"Arqueólogo"</code>.
+	 * 
+	 * @param u El nombre del usuario que inicio sesión y cuyo rol es arqueólogo.
+	 * @return El panel de menú principal para el rol de arqueólogo.
+	 */
+	private JPanel panelMenuPrincipalArqueologo(String u) {
 		JPanel menuPrincipal = new JPanel();
 		menuPrincipal.setLayout(null);
 		menuPrincipal.setBackground(new Color(63, 80, 122));
 		
-		JLabel bienvenida = new JLabel("Bienvenid@ arqueólogo " + u.getNombre());
+		JLabel bienvenida = new JLabel("Bienvenid@ arqueólogo " + u);
 		bienvenida.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		
 		bienvenida.setSize(bienvenida.getPreferredSize());
@@ -178,7 +191,15 @@ public class Gui {
 		return menuPrincipal;
 	}
 
-	private JPanel panelRepresentacionDinos(Usuario u) {
+	/**
+	 * Crea y devuelve el panel donde se representan gráficamente los dinosaurios extintos y no extintos.
+	 * Se agregan los botones, paneles y etiquetas necesarios para su funcionamiento además de botones para cerrar sesión, 
+	 * regresar, entre otros.
+	 * 
+	 * @param u El nombre del usuario que inicio sesión y cuyo rol es arqueólogo.
+	 * @return El panel donde se representan gráficamente los dinosaurios.
+	 */
+	private JPanel panelRepresentacionDinos(String u) {
 		JPanel menu = new JPanel(); //Panel menu
 		menu.setLayout(null);
 		menu.setBackground(new Color(120, 120, 100));
@@ -310,7 +331,14 @@ public class Gui {
 		return menu;
 	}
 
-	private JPanel panelGestionDinos(Usuario u) {
+	/**
+	 * Crea y devuelve el panel donde se gestionan todos los dinosaurios, es decir, donde se pueden eliminar 
+	 * de la lista.
+	 * 
+	 * @param u El nombre del usuario que inicio sesión y cuyo rol ese arqueólogo.
+	 * @return El panel de gestión de los dinosaurios.
+	 */
+	private JPanel panelGestionDinos(String u) {
 		JPanel menu = new JPanel(); //Panel menu
 		menu.setLayout(null);
 		menu.setBackground(new Color(120, 120, 100));
@@ -424,12 +452,12 @@ public class Gui {
 //-------------------------------------------------------------------------------------------------------------
 	
 	
-	private JPanel panelMenuPrincipalGeneral(Usuario u) {
+	private JPanel panelMenuPrincipalGeneral(String u) {
 		JPanel menuPrincipal = new JPanel();
 		menuPrincipal.setLayout(null);
 		menuPrincipal.setBackground(new Color(63, 80, 122));
 		
-		JLabel bienvenida = new JLabel("Bienvenid@ general " + u.getNombre());
+		JLabel bienvenida = new JLabel("Bienvenid@ general " + u);
 		bienvenida.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		
 		bienvenida.setSize(bienvenida.getPreferredSize());
@@ -479,7 +507,7 @@ public class Gui {
 	}
 	
 //MÉTODO PARA MOSTRAR LOS PROTOTIPOS VISUALES DE TECNOLOGÍA BÉLICA
-	private JPanel prototiposVisualesArmas(Usuario u) {
+	private JPanel prototiposVisualesArmas(String u) {
 		JPanel menu = new JPanel(); //Panel menu
 		menu.setLayout(null);
 		menu.setBackground(new Color(120, 120, 100));
@@ -608,7 +636,7 @@ public class Gui {
 }
 
 	// GESTION DE ARMAMENTOS
-	private JPanel panelGestionArmamento(Usuario u) {
+	private JPanel panelGestionArmamento(String u) {
 		JPanel menu = new JPanel(); //Panel menu
 		menu.setLayout(null);
 		menu.setBackground(new Color(120, 120, 100));
@@ -721,13 +749,12 @@ public class Gui {
 	}
 
 // Método para validar el ingreso de los usuarios con los datos guardados
-	private Usuario validar(String usuario, String contraseña) {
-		for (Usuario u: sistema.getUsuarios()) {
-			if (u.getNombre().equals(usuario)) {
-				if (u.getContraseña().equals(contraseña)) {
-					return u;
-				}
-			}
+	private String validar(String usuario, String contraseña) {
+		for (int i = 0; i < sistema.getUsuariosSize(); i++) {
+			String u = sistema.validar(usuario, contraseña);
+					if (u != null) {
+						return u;   //revisarrrrrrrrr
+					}
 		}
 		return null;
 	}
