@@ -222,7 +222,7 @@ public class Gui {
 		
 		mostrarE.addActionListener(e->{
 			listado.removeAll();
-			for (int i = 0; i< sistema.getDinos().size();i++) {
+			for (int i = 0; i< sistema.getDinosSize();i++) {
 				String dino = sistema.getDinosaurio(i, true);
 				if (dino != null) {
 					dino += "\n";
@@ -241,7 +241,7 @@ public class Gui {
 		
 		mostrarNE.addActionListener(e->{
 			listado.removeAll();
-			for (int i = 0; i< sistema.getDinos().size();i++) {
+			for (int i = 0; i< sistema.getDinosSize();i++) {
 				String dino = sistema.getDinosaurio(i, false);
 				if (dino != null) {
 					dino += "\n";
@@ -356,7 +356,7 @@ public class Gui {
 		
 		mostrar.addActionListener(e->{
 			listado.removeAll();
-			for (int i = 0; i< sistema.getDinos().size();i++) {
+			for (int i = 0; i< sistema.getDinosSize();i++) {
 				String dino = sistema.getDinosaurio(i, null) + "\n";
 				JLabel dinoLabel = new JLabel(dino);
 				listado.add(dinoLabel);
@@ -396,7 +396,7 @@ public class Gui {
 				
 				if (sistema.removeDino(Integer.parseInt(pedirId.getText()))){
 					listado.removeAll();
-					for (int i = 0; i< sistema.getDinos().size();i++) {
+					for (int i = 0; i< sistema.getDinosSize();i++) {
 						String dino = sistema.getDinosaurio(i, null) + "\n";
 						JLabel dinoLabel = new JLabel(dino);
 						listado.add(dinoLabel);
@@ -531,7 +531,7 @@ public class Gui {
 		
 		mostrarC.addActionListener(e->{
 			listado.removeAll();
-			for (int i = 0; i< sistema.getArmas().size();i++) {
+			for (int i = 0; i< sistema.getArmasSize();i++) {
 				String arma = sistema.getArmamento(i, true);
 				if (arma != null) {
 					arma += "\n";
@@ -550,7 +550,7 @@ public class Gui {
 		
 		mostrarI.addActionListener(e->{
 			listado.removeAll();
-			for (int i = 0; i< sistema.getArmas().size();i++) {
+			for (int i = 0; i< sistema.getArmasSize();i++) {
 				String arma = sistema.getArmamento(i, false);
 				if (arma != null) {
 					arma += "\n";
@@ -653,7 +653,7 @@ public class Gui {
 		
 		mostrar.addActionListener(e->{
 			listado.removeAll();
-			for (int i = 0; i< sistema.getArmas().size();i++) {
+			for (int i = 0; i< sistema.getArmasSize();i++) {
 				String arma = sistema.getArmamento(i, null) + "\n";
 				System.out.println(arma);
 				JLabel armaLabel = new JLabel(arma);
@@ -694,7 +694,7 @@ public class Gui {
 				
 				if (sistema.removeArmamento(Integer.parseInt(pedirId.getText()))){
 					listado.removeAll();
-					for (int i = 0; i< sistema.getArmas().size();i++) {
+					for (int i = 0; i< sistema.getArmasSize();i++) {
 						String arma = sistema.getArmamento(i, null) + "\n";
 						JLabel armaLabel = new JLabel(arma);
 						listado.add(armaLabel);

@@ -28,13 +28,13 @@ public class Armamento {
 		return tipo;
 	}
 	
-	public boolean estaIncompleto() {
+	public boolean estaCompleto() {
 		return completo;
 	}
 	
 	public String toString() {
 		String estado;
-		if (estaIncompleto()) estado = "Completo";
+		if (estaCompleto()) estado = "Completo";
 		else estado = "Incompleto";
 		return	"id: " + id +
 				"\n; nombre: " + nombre+

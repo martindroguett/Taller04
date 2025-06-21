@@ -44,25 +44,24 @@ public class SistemaImpl implements Sistema {
 	}
 	
 	@Override
-	public List<Usuario> getUsuarios(){
-		return usuarios;
+	public int getUsuariosSize(){
+		return usuarios.size();
 	}
 	
 	@Override
-	public List<Dinosaurio> getDinos(){
-		return dinosaurios;
+	public int getDinosSize(){
+		return dinosaurios.size();
 	}
 	
 	@Override
-	public List<Armamento> getArmas(){
-		return armamentos;
+	public int getArmasSize(){
+		return armamentos.size();
 	}
 
 	@Override
 	public void iniciar() {
 		gui.iniciar();
 	}
-
 
 	// MÉTODO PARA ELIMINAR EL ARMEMENTO DE LA LISTA DE ARMAMENTOS
 	@Override
@@ -87,8 +86,8 @@ public class SistemaImpl implements Sistema {
 	@Override
 	public String getArmamento(int i, Boolean completo) {
 		if (completo == null) return armamentos.get(i).toString();
-		if(armamentos.get(i).estaIncompleto() && completo) return armamentos.get(i).toString();
-		if (!armamentos.get(i).estaIncompleto() && !completo) return  armamentos.get(i).toString();
+		if(armamentos.get(i).estaCompleto() && completo) return armamentos.get(i).toString();
+		if (!armamentos.get(i).estaCompleto() && !completo) return  armamentos.get(i).toString();
 		else return null;
 	}
 
@@ -133,6 +132,28 @@ public class SistemaImpl implements Sistema {
 			return arma.tipo();
 		} return null;
 		
+	}
+
+	@Override
+	public String validar(String usuario, String contraseña) {
+		for (Usuario u: usuarios) {
+			if (u.getNombre().equals(usuario) && u.getContraseña().equals(contraseña)) return u.getNombre();
+		}
+		return null;
+	}
+
+	@Override
+	public String getRol(String userName) {
+		for (Usuario u: usuarios) {
+			if (u.getNombre().equals(userName)) {
+				if (u.esGeneral()) {
+					return "general";
+				} else {
+					return "arqueologo";
+				}
+			}
+		}
+		return null;
 	}	
 
 }

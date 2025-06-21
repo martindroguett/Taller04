@@ -45,6 +45,7 @@ public class App {
 		sistema.iniciar();
 		
 	}
+
 	
 	//--------------------------------------------------------------------
 	//Métodos
@@ -56,6 +57,7 @@ public class App {
      * @param file el nombre o ruta del archivo que contiene los datos de los armamentos.
      * @throws FileNotFoundException si el archivo especificado no se encuentra.
      */
+
 	private static void cargarArmamentos(String file) throws FileNotFoundException {
 		Scanner lector = new Scanner(new File(file));
 		while(lector.hasNextLine()) {
