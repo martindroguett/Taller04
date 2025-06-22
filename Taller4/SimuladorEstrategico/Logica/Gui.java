@@ -16,6 +16,8 @@ import java.io.IOException;
  * 
  * <p>Incluye métodos para generar la ventana principal, el panel de inicio de sesión
  * y los menús correspondientes al rol del usuario.
+ * 
+ *  @author Martin Ignacio Droguett Robledo, Catalina Andrea Galleguillos Carvajal.
  */
 
 public class Gui {
@@ -46,20 +48,18 @@ public class Gui {
 	
 	public void iniciar() {
 			generarFrame();
-		
 			ventana.getContentPane().add(panelInicioSesion());
 			ventana.setVisible(true);
 			ventana.setResizable(true);
 	}
 	/**
 	 * Crea y devuelve el panel de inicio de sesión en el cual se agregan las componentes necesarias
-	 * para que el usuario ingrese su nombre de usuario y contraseña, además de mostrar el título del programa.
+	 * para que el usuario ingrese su nombre de usuario y contraseña. Igualmente muestra el título del programa.
 	 * 
 	 * @return El panel de inicio de sesión con las componentes necesarias.
 	 */
 	
 	private JPanel panelInicioSesion() {
-		
 		JPanel inicioSesion = new JPanel();
 		inicioSesion.setLayout(null);
 		inicioSesion.setBackground(new Color(174, 182, 191));
@@ -153,11 +153,11 @@ public class Gui {
      * Crea y devuelve el panel del menú principal para un usuario cuyo rol
      * es <code>"arqueólogo"</code>. 
      * <p>
-     * Este panel contiene opciones específicas para la gestión y representación
+     * Este panel contiene opciones para la gestión y representación
      * de dinosaurios, además de un botón para cerrar sesión.
      * 
-     * @param u el nombre del usuario que inició sesión y cuyo rol es arqueólogo.
-     * @return el panel de menú principal correspondiente al arqueólogo.
+     * @param u el nombre del usuario que inició sesión con rol arqueólogo.
+     * @return el panel de menú principal de arqueólogo.
      */
 	
 	private JPanel panelMenuPrincipalArqueologo(String u) {
@@ -214,12 +214,12 @@ public class Gui {
 	}
 
 	/**
-	 * Crea y devuelve el panel donde se representan gráficamente los dinosaurios extintos y no extintos.
-	 * Se agregan los botones, paneles y etiquetas necesarios para su funcionamiento además de botones para cerrar sesión, 
-	 * regresar, entre otros.
+	 * Crea y devuelve el panel donde se ven los dinosaurios extintos y no extintos.
+	 * Se agregan los botones, paneles y etiquetas junto a botones para cerrar sesión, 
+	 * regresar, etc.
 	 * 
-	 * @param u El nombre del usuario que inicio sesión y cuyo rol es arqueólogo.
-	 * @return El panel donde se representan gráficamente los dinosaurios.
+	 * @param u El nombre del usuario que inicio sesión con rol arqueólogo.
+	 * @return El panel donde se representan los dinosaurios.
 	 */
 	
 	private JPanel panelRepresentacionDinos(String u) {
@@ -459,15 +459,14 @@ public class Gui {
 		return menu;
 		}
 
-
 	 /**
      * Crea y devuelve el panel del menú principal para un usuario cuyo rol
      * es <code>"general"</code>. 
      * <p>
-     * Este panel contiene opciones específicas para la gestión y representación
+     * Este panel contiene opciones para la gestión y representación
      * de armamentos y un botón para cerrar sesión.
      * 
-     * @param u el nombre del usuario que inició sesión y cuyo rol es arqueólogo.
+     * @param u el nombre del usuario que inició sesión don rol de arqueólogo.
      * @return el panel de menú principal correspondiente al arqueólogo.
      */
 	
@@ -476,7 +475,7 @@ public class Gui {
 		menuPrincipal.setLayout(null);
 		menuPrincipal.setBackground(new Color(63, 80, 122));
 		
-		JLabel bienvenida = new JLabel("Bienvenid@ general ");
+		JLabel bienvenida = new JLabel("Bienvenid@ general");
 		bienvenida.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		
 		bienvenida.setSize(300,50);
@@ -531,8 +530,8 @@ public class Gui {
 	 * <p>Incluye botón para cerrar sesión, retornar al menú principal, 
 	 * mostrar lista de armas y generar visualizaciones basadas en el ID de un armamento.
 	 * 
-	 * @param u el nombre del usuario que ha iniciado sesión (rol general).
-	 * @return el panel configurado para la visualización de prototipos de armamentos.
+	 * @param u el nombre del usuario que ha iniciado sesión con rol general.
+	 * @return el panel para la visualización de prototipos de armamentos.
 	 */
 
 	private JPanel prototiposVisualesArmas(String u) {
@@ -557,7 +556,7 @@ public class Gui {
 		retornar.setBounds((x - altoL -20), 50,  altoL, anchoL);
 		retornar.addActionListener(e -> {
 			ventana.getContentPane().removeAll();
-			ventana.getContentPane().add(panelMenuPrincipalArqueologo(u));
+			ventana.getContentPane().add(panelMenuPrincipalGeneral(u));
 			ventana.revalidate();
 			ventana.repaint();
 		});
@@ -663,18 +662,18 @@ public class Gui {
 }
 	/**
 	 * Crea y devuelve un panel que permite al usuario gestionar los armamentos
-	 * registrados en el sistema.
+	 * almacenados en el sistema.
 	 * 
 	 * <p>Incluye opciones para mostrar una lista de los armamentos existentes y eliminar un armamento 
-	 * específico mediante su ID. También proporciona botón para cerrar sesión 
+	 * específico mediante su ID. También posee un botón para cerrar sesión 
 	 * o regresar al menú principal.
 	 * 
-	 * @param u el nombre del usuario que ha iniciado sesión (rol general).
-	 * @return el panel configurado para la gestión de armamentos.
+	 * @param u el nombre del usuario que ha iniciado sesión con rol general.
+	 * @return el panel para la gestión de armamentos.
 	 */
 	
 	private JPanel panelGestionArmamento(String u) {
-		JPanel menu = new JPanel(); //Panel menu
+		JPanel menu = new JPanel(); 
 		menu.setLayout(null);
 		menu.setBackground(new Color(120, 120, 100));
 
@@ -777,11 +776,11 @@ public class Gui {
 
 	/**
      * Valida los datos de acceso ingresadas por el usuario con
-     * los datos almacenados en la App.
+     * los datos almacenados en la clase App.
      * 
      * @param usuario el nombre de usuario ingresado.
      * @param password la contraseña ingresada.
-     * @return el nombre de usuario validado si las credenciales son correctas;
+     * @return el nombre de usuario validado si los datos son correctos;
      *         {@code null} en caso contrario.
      */
 	
@@ -798,7 +797,7 @@ public class Gui {
 	/**
      * Crea y configura el {@code JFrame} principal de la aplicación, estableciendo
      * su tamaño, comportamiento de cierre y otras propiedades.
-     * Este método es invocado por {@link #iniciar()} para preparar la ventana.
+     * Este método es invocado por {@link #iniciar()} para generar la ventana.
      */
 	private void generarFrame() {
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -1,7 +1,7 @@
 package Logica;
 
-// Martin Ignacio Droguett Robledo 21.919.910-4
-// Catalina Andrea Galleguillos Carvajal 21.702.133-2
+// Martin Ignacio Droguett Robledo 21.919.910-4, ICCI
+// Catalina Andrea Galleguillos Carvajal 21.702.133-2, ICCI
 
 import Dominio.*;
 import java.util.*;
