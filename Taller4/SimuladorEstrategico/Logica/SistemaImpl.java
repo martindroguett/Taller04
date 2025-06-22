@@ -9,17 +9,17 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 
 /**
- * Una implementación concreta de la interfaz <code>Sistema</code>.
+ * Una implementación concreta de la interfaz {@code Sistema}.
  * 
  * <p> Esta clase se encarga del manejo de todas las operaciones y cálculos relacionados al sistema, 
- * el acceso a los datos, además de la implementación de la interfaz gráfica de usuario <code>Gui</code>.
+ * el acceso a los datos, además de la implementación de la interfaz gráfica de usuario {@code Gui}.
  * 
  * @author Martín Ignacio Droguett Robledo, Catalina Andrea Galleguillos Carvajal.
  */
 public class SistemaImpl implements Sistema {
 	
 	/**
-	 * La unica instancia de <code>SistemaImpl</code>, sigue el patrón de diseño Singleton.
+	 * La unica instancia de {@code SistemaImpl}, sigue el patrón de diseño Singleton.
 	 */
 	private static SistemaImpl instance;
 	
@@ -53,10 +53,10 @@ public class SistemaImpl implements Sistema {
 	private SistemaImpl() {}
 	
 	/**
-	 * Devuelve la unica instancia de la clase <code>SistemaImpl></code>.
+	 * Devuelve la unica instancia de la clase {@code SistemaImpl}.
 	 * Si la instancia no ha sido creada aún, se crea una nueva.
 	 * 
-	 * @return La única instancia de <code>SistemaImpl></code>.
+	 * @return La única instancia de {@code SistemaImpl}.
 	 */
 	public static Sistema getInstance() {
 		if (instance == null) {
@@ -117,8 +117,8 @@ public class SistemaImpl implements Sistema {
 	 * Método privado que busca un armamento en específico a partir de su id y lo retorna.
 	 * Privado debido a que el sistema no puede retornar objetos a través de un método público.
 	 * 
-	 * @param id La id única de la instancia de <code>Armamento</code> que se está buscando.
-	 * @return La instancia de <code>Armamento</code> a la cual pertenece la id. 
+	 * @param id La id única de la instancia de {@code Armamento} que se está buscando.
+	 * @return La instancia de {@code Armamento} a la cual pertenece la id. 
 	 */
 	private Armamento buscarArmamento(int id) {
 		for (Armamento a: armamentos) {
@@ -149,8 +149,8 @@ public class SistemaImpl implements Sistema {
 	 * Método privado que busca un dinosaurio en específico a partir de su id y lo retorna.
 	 * Privado debido a que el sistema no puede retornar objetos a través de un método público.
 	 * 
-	 * @param id La id única de la instancia de <code>Dinosaurio</code> que se está buscando.
-	 * @return La instancia de <code>Dinosaurio</code> a la cual pertenece la id. 
+	 * @param id La id única de la instancia de {@code Dinosaurio} que se está buscando.
+	 * @return La instancia de {@code Dinosaurio} a la cual pertenece la id. 
 	 */
 	private Dinosaurio buscarDinosaurio(int id) {
 		for (Dinosaurio d: dinosaurios) {

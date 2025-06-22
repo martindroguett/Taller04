@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 /**
- * La clase <code>DrawPanel</code> se encarga de crear un panel donde se muestran
+ * La clase {@code DrawPanel} se encarga de crear un panel donde se muestran
  * los dibujos.
  * Contiene los métodos necesarios para definir el tamaño del panel y el dibujo específico.
  * 
@@ -44,7 +44,7 @@ public class DrawPanel extends JPanel{
 
     /**
      * Se encarga de dibujar en el panel según el nombre, puede tomar los valores de 
-     * cualquier <code>Dinosaurio</code> extinto o <code>Armamento</code> incompleto.
+     * cualquier {@code Dinosaurio} extinto o {@code Armamento} incompleto.
      * 
      * @param g Realiza las operaciones gráficas del método.
      */
@@ -202,7 +202,7 @@ public class DrawPanel extends JPanel{
 	    	
 	    }
 	    if (dibujo.equals("Pistola")) {
-	    	g.setColor(new Color(158, 158, 158)); // boca de la pistola
+	    	g.setColor(new Color(158, 158, 158));
 	    	g.fillRect(50, 80, 240, 60);
 	    	
 	    	g.setColor(new Color(117, 117, 117));
