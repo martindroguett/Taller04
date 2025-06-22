@@ -2,19 +2,52 @@ package Logica;
 
 import java.awt.*;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+
 import javax.swing.JPanel;
 
+/**
+ * La clase <code>DrawPanel</code> se encarga de crear un panel donde se muestran
+ * los dibujos.
+ * Contiene los métodos necesarios para definir el tamaño del panel y el dibujo específico.
+ * 
+ * @author Martin Ignacio Droguett Robledo, Catalina Andrea Galleguillos Carvajal.
+ */
 public class DrawPanel extends JPanel{
-	private int width;
+	/**
+	 * El ancho del panel donde se mostrará la imagen.
+	 */
+    private int width;
+   
+    /**
+	 * El largo o altura del panel donde se mostrará la imagen.
+	 */
     private int height;
-    private String dibujo;
+    
+    /**
+	 * Atributo que contiene el nombre del dibujo que se quiere mostrar en el panel.
+	 */
+	private String dibujo;
 
+	/**
+	 * Constructor público del panel donde se muestran los dibujos a realizar.
+	 * 
+	 * @param dibujo El nombre del objeto que se quiere dibujar.
+	 * @param width El ancho del panel, es un número entero.
+     * @param height El largo o altura del panel, es un número entero.
+	 */
     public DrawPanel(String dibujo, int width, int height) {
     	this.dibujo = dibujo;
         this.width = width;
         this.height = height;
     }
 
+    /**
+     * Se encarga de dibujar en el panel según el nombre, puede tomar los valores de 
+     * cualquier <code>Dinosaurio</code> extinto o <code>Armamento</code> incompleto.
+     * 
+     * @param g Realiza las operaciones gráficas del método.
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

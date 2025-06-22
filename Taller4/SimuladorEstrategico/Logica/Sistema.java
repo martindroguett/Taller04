@@ -3,10 +3,17 @@ package Logica;
 import Dominio.*;
 import java.util.*;
 
+/**
+ * La interfaz define el contrato que se encarga de la gestión del sistema del simulador estratégico.
+ * Las clases que implementen esta interfaz deberán implementar todos los métodos definidos aquí, los cuales 
+ * se encargan de la gestión de los datos.
+ * 
+ * @author Martín Ignacio Droguett Robledo, Catalina Andrea Galleguillos Carvajal.
+ */
 public interface Sistema {
 
 	/**
-	 * Crea una nueva instancia de <code>Armamento</code>.
+	 * Crea una nueva instancia de {@code Armamento}
 	 * 
 	 * @param id El identificador único del armamento.
 	 * @param nombre El nombre del armamento.
@@ -16,7 +23,7 @@ public interface Sistema {
 	void crearArmamento(int id, String nombre, String tipo, String estado);
 
 	/**
-	 * Crea una nueva instancia de <code>Dinosaurio</code>.
+	 * Crea una nueva instancia de {@code Dinosaurio}.
 	 * 
 	 * @param id El identificador único del dinosaurio.
 	 * @param nombre El nombre del dinosaurio.
@@ -26,7 +33,7 @@ public interface Sistema {
 	void crearDino(int id, String nombre, String tipo, String estado);
 
 	/**
-	 * Crea una nueva instancia de <code>Usuario</code>.
+	 * Crea una nueva instancia de {@code Usuario}.
 	 * 
 	 * @param id El identificador único del usuario.
 	 * @param nombre El nombre del usuario.
@@ -101,12 +108,40 @@ public interface Sistema {
 	 */
 	String getDinosaurio(int id, Boolean extinto);
 
+	/**
+	 * Busca un <code>Dinosaurio</code> en una lista y retorna el nombre del dinosaurio.
+	 * 
+	 * @param id La id del dinosurio del cual se quiere obtener el nombre.
+	 * @return El nombre del dinosaurio, si no encuentra ningún dinosaurio con esa id retorna nulo.
+	 */
 	String getDinosaurioName(int id);
 
+	/**
+	 * Busca un <code>Armamento</code> en una lista y retorna el tipo del Armamento.
+	 * 
+	 * @param id La id del armamento del cual se quiere obtener el tipo.
+	 * @return El tipo del armamento, si no encuentra ningún armamento con esa id retorna nulo. 
+	 */
 	String getArmaTipo(int id);
 
+	/**
+	 * Verifica si el <code>Usuario</code> con el nombre ingresado como parámetro existe y si la contraseña 
+	 * ingresada es la misma que la del atributo del usuario. Finalmente retorna el nombre de usuario.
+	 * 
+	 * @param usuario El nombre de usuario que se quiere validar.
+	 * @param contraseña La contraseña del usuario que se quiere validar.
+	 * @return El nombre de usuario, siempre y cuando se haya validado su identidad, de lo contrario se retorna nulo.
+	 */
 	String validar(String usuario, String contraseña);
 
+	/**
+	 * Encuentra al <code>Usuario</code> con el nombre ingresado y retorna su rol.
+	 * 
+	 * @param userName El nombre de usuario a analizar.
+	 * @return <code>"general"</code> si el usuario tiene como <code>true</code> el atributo <code>esGeneral</code>
+	 * <code>"arqueologo"</code> si el usuario tiene como <code>false</code> el atributo <code>esGeneral</code>.
+	 * Si el usuario no existe retorna nulo.
+	 */
 	String getRol(String userName);
 
 }

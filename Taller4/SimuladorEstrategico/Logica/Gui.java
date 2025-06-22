@@ -21,7 +21,6 @@ public class Gui {
 			generarFrame();
 		
 			ventana.getContentPane().add(panelInicioSesion());
-		
 			ventana.setVisible(true);
 	}
 	/**
