@@ -92,6 +92,14 @@ void iniciar();
 	 */
 	String getArmamento(int i, Boolean completo);
 	
+	/**
+	 * Encuentra y elimina, de una lista de {@code Dinosaurio}, un dinosaurio específico, a partir
+	 * de su id, retornando si fue exitosa o no la acción.
+	 * 
+	 * @param id El identificador único del dinosaurio a eliminar.
+	 * @return Un valor booleano. {@code true} si el dinosaurio fue eliminado, {@code false} si el dinosaurio
+	 * no existe dentro de la lista, y por lo tanto, no fue eliminado.
+	 */
 	boolean removeDino(int id);
 	
 	/**

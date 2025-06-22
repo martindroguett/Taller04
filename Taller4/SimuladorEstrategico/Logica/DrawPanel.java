@@ -14,40 +14,40 @@ import javax.swing.JPanel;
  * @author Martin Ignacio Droguett Robledo, Catalina Andrea Galleguillos Carvajal.
  */
 public class DrawPanel extends JPanel{
-	/**
-	 * El ancho del panel donde se mostrará la imagen.
-	 */
+/**
+ * El ancho del panel donde se mostrará la imagen.
+ */
     private int width;
    
-    /**
-	 * El largo o altura del panel donde se mostrará la imagen.
-	 */
+/**
+ * El largo o altura del panel donde se mostrará la imagen.
+ */
     private int height;
     
-    /**
-	 * Atributo que contiene el nombre del dibujo que se quiere mostrar en el panel.
-	 */
+/**
+ * Atributo que contiene el nombre del dibujo que se quiere mostrar en el panel.
+ */
 	private String dibujo;
 
-	/**
-	 * Constructor público del panel donde se muestran los dibujos a realizar.
-	 * 
-	 * @param dibujo El nombre del objeto que se quiere dibujar.
-	 * @param width El ancho del panel, es un número entero.
-     * @param height El largo o altura del panel, es un número entero.
-	 */
+/**
+ * Constructor público del panel donde se muestran los dibujos a realizar.
+ * 
+ * @param dibujo El nombre del objeto que se quiere dibujar.
+ * @param width El ancho del panel, es un número entero.
+ * @param height El largo o altura del panel, es un número entero.
+ */
     public DrawPanel(String dibujo, int width, int height) {
     	this.dibujo = dibujo;
         this.width = width;
         this.height = height;
     }
 
-    /**
-     * Se encarga de dibujar en el panel según el nombre, puede tomar los valores de 
-     * cualquier {@code Dinosaurio} extinto o {@code Armamento} incompleto.
-     * 
-     * @param g Realiza las operaciones gráficas del método.
-     */
+/**
+ * Se encarga de dibujar en el panel según el nombre, puede tomar los valores de 
+ * cualquier {@code Dinosaurio} extinto o {@code Armamento} incompleto.
+ * 
+ * @param g Realiza las operaciones gráficas del método.
+ */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

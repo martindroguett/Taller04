@@ -18,46 +18,46 @@ import java.awt.*;
  */
 public class SistemaImpl implements Sistema {
 	
-	/**
-	 * La unica instancia de {@code SistemaImpl}, sigue el patrón de diseño Singleton.
-	 */
+/**
+ * La unica instancia de {@code SistemaImpl}, sigue el patrón de diseño Singleton.
+ */
 	private static SistemaImpl instance;
 	
-	/**
-	 * Instancia de la interfaz gráfica de usuario.
-	 */
+/**
+ * Instancia de la interfaz gráfica de usuario.
+ */
 	private static Gui gui = new Gui();
 	
-	/**
-	 * Lista de armamentos registrados en el sistema.
-	 * Se utiliza para obtener datos de un armamento en específico y para la validación de este.
-	 */
+/**
+ * Lista de armamentos registrados en el sistema.
+ * Se utiliza para obtener datos de un armamento en específico y para la validación de este.
+ */
 	private static List<Armamento> armamentos = new ArrayList<>();
 	
-	/**
-	 * Lista de dinosaurios registrados en el sistema.
-	 * Se utiliza para obtener datos de un dinosaurio en específico y para la validación de este.
-	 */
+/**
+ * Lista de dinosaurios registrados en el sistema.
+ * Se utiliza para obtener datos de un dinosaurio en específico y para la validación de este.
+ */
 	private static List <Dinosaurio> dinosaurios = new ArrayList<>();
 	
-	/**
-	 * Lista de usuario registrados en el sistema.
-	 * Se utiliza para obtener datos de un usuario en específico y para la validación de este.
-	 */
+/**
+ * Lista de usuario registrados en el sistema.
+ * Se utiliza para obtener datos de un usuario en específico y para la validación de este.
+ */
 	private static List<Usuario> usuarios = new ArrayList<>();
 	
-	/**
-	 * Constructor privado para evitar que se cree una nueva instancia de este desde la app.
-	 * El constructor es privado porque el patrón Singleton asegura que haya una única instancia.
-	 */
+/**
+ * Constructor privado para evitar que se cree una nueva instancia de este desde la app.
+ * El constructor es privado porque el patrón Singleton asegura que haya una única instancia.
+ */
 	private SistemaImpl() {}
 	
-	/**
-	 * Devuelve la unica instancia de la clase {@code SistemaImpl}.
-	 * Si la instancia no ha sido creada aún, se crea una nueva.
-	 * 
-	 * @return La única instancia de {@code SistemaImpl}.
-	 */
+/**
+ * Devuelve la unica instancia de la clase {@code SistemaImpl}.
+ * Si la instancia no ha sido creada aún, se crea una nueva.
+ * 
+ * @return La única instancia de {@code SistemaImpl}.
+ */
 	public static Sistema getInstance() {
 		if (instance == null) {
 			instance = new SistemaImpl();
@@ -113,13 +113,13 @@ public class SistemaImpl implements Sistema {
 		return false; 
 	}
 
-	/**
-	 * Método privado que busca un armamento en específico a partir de su id y lo retorna.
-	 * Privado debido a que el sistema no puede retornar objetos a través de un método público.
-	 * 
-	 * @param id La id única de la instancia de {@code Armamento} que se está buscando.
-	 * @return La instancia de {@code Armamento} a la cual pertenece la id. 
-	 */
+/**
+ * Método privado que busca un armamento en específico a partir de su id y lo retorna.
+ * Privado debido a que el sistema no puede retornar objetos a través de un método público.
+ * 
+ * @param id La id única de la instancia de {@code Armamento} que se está buscando.
+ * @return La instancia de {@code Armamento} a la cual pertenece la id. 
+ */
 	private Armamento buscarArmamento(int id) {
 		for (Armamento a: armamentos) {
 			if(a.getId() == id) return a;
@@ -145,13 +145,13 @@ public class SistemaImpl implements Sistema {
 		return false; 
 	}
 	
-	/**
-	 * Método privado que busca un dinosaurio en específico a partir de su id y lo retorna.
-	 * Privado debido a que el sistema no puede retornar objetos a través de un método público.
-	 * 
-	 * @param id La id única de la instancia de {@code Dinosaurio} que se está buscando.
-	 * @return La instancia de {@code Dinosaurio} a la cual pertenece la id. 
-	 */
+/**
+ * Método privado que busca un dinosaurio en específico a partir de su id y lo retorna.
+ * Privado debido a que el sistema no puede retornar objetos a través de un método público.
+ * 
+ * @param id La id única de la instancia de {@code Dinosaurio} que se está buscando.
+ * @return La instancia de {@code Dinosaurio} a la cual pertenece la id. 
+ */
 	private Dinosaurio buscarDinosaurio(int id) {
 		for (Dinosaurio d: dinosaurios) {
 			if(d.getId() == id) return d;

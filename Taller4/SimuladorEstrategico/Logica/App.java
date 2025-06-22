@@ -17,29 +17,28 @@ import java.io.FileNotFoundException;
  */
 
 public class App {
-	/**
-	 * Sistema de simulación utilizado por la aplicación.
-	 */
-	
-	private static Sistema sistema = SistemaImpl.getInstance();
-	/**
-	 * Scanner utilizado para leer la entrada estándar (por consola).
-	 */
+/**
+ * Sistema de simulación utilizado por la aplicación.
+ */
+
+private static Sistema sistema = SistemaImpl.getInstance();
+/**
+ * Scanner utilizado para leer la entrada estándar (por consola).
+ */
 	
 	private static Scanner scanner = new Scanner(System.in);
 	
-	/**
-     * Método principal que inicia la ejecución del programa.
-     * <p>
-     * Este método carga los datos iniciales desde archivos de texto y,
-     * si la carga es exitosa, inicia el simulador mediante el sistema.
-     * 
-     * @param args Los argumentos de línea de comandos (no utilizados en esta implementación).
-     */
+/**
+ * Método principal que inicia la ejecución del programa.
+ * <p>
+ * Este método carga los datos iniciales desde archivos de texto y,
+ * si la carga es exitosa, inicia el simulador mediante el sistema.
+ * s
+ * @param args Los argumentos de línea de comandos (no utilizados en esta implementación).
+ */
 	
 	public static void main(String[] args) {
 		
-		// Los archivos existen 
 		try {
 			cargarUsuarios("txts/usuarios.txt");
 			cargarDinos("txts/dinosaurios.txt");
@@ -55,17 +54,13 @@ public class App {
 		
 	}
 
-	
-	//--------------------------------------------------------------------
-	//Métodos
-	//--------------------------------------------------------------------
-	
-	/**
-     * Carga los datos de armamentos desde un archivo de texto y los registra en el sistema.
-     * 
-     * @param file el nombre o ruta del archivo que contiene los datos de los armamentos.
-     * @throws FileNotFoundException si el archivo especificado no se encuentra.
-     */
+
+/**
+ * Carga los datos de armamentos desde un archivo de texto y los registra en el sistema.
+ * 
+ * @param file el nombre o ruta del archivo que contiene los datos de los armamentos.
+ * @throws FileNotFoundException si el archivo especificado no se encuentra.
+ */
 
 	private static void cargarArmamentos(String file) throws FileNotFoundException {
 		Scanner lector = new Scanner(new File(file));
@@ -83,12 +78,12 @@ public class App {
 		
 	}
 	
-	/**
-     * Carga los datos de dinosaurios desde un archivo de texto y los registra en el sistema.
-     * 
-     * @param file el nombre o ruta del archivo que contiene los datos de los dinosaurios.
-     * @throws FileNotFoundException si el archivo especificado no se encuentra.
-     */
+/**
+ * Carga los datos de dinosaurios desde un archivo de texto y los registra en el sistema.
+ * 
+ * @param file el nombre o ruta del archivo que contiene los datos de los dinosaurios.
+ * @throws FileNotFoundException si el archivo especificado no se encuentra.
+ */
 	
 	private static void cargarDinos(String file) throws FileNotFoundException {
 		Scanner lector = new Scanner(new File(file));
@@ -104,12 +99,12 @@ public class App {
 		lector.close();
 	}
 
-	 /**
-     * Carga los datos de usuarios desde un archivo de texto y los registra en el sistema.
-     * 
-     * @param file el nombre o ruta del archivo que contiene los datos de los usuarios.
-     * @throws FileNotFoundException si el archivo especificado no se encuentra.
-     */
+ /**
+ * Carga los datos de usuarios desde un archivo de texto y los registra en el sistema.
+ * 
+ * @param file el nombre o ruta del archivo que contiene los datos de los usuarios.
+ * @throws FileNotFoundException si el archivo especificado no se encuentra.
+ */
 	private static void cargarUsuarios(String file) throws FileNotFoundException {
 		Scanner lector = new Scanner(new File(file));
 		while(lector.hasNextLine()) {

@@ -21,30 +21,30 @@ import java.io.IOException;
  */
 
 public class Gui {
-	/**
-	 * Instancia única del sistema que gestiona la lógica del simulador estratégico.
-	 */
+/**
+ * Instancia única del sistema que gestiona la lógica del simulador estratégico.
+ */
 	private static Sistema sistema = SistemaImpl.getInstance();
 
-	/**
-	 * Ventana principal de la interfaz gráfica del simulador.
-	 */
+/**
+ * Ventana principal de la interfaz gráfica del simulador.
+ */
 	private static JFrame ventana = new JFrame("Simulador estratégico");
 
-	/**
-	 * Ancho de la ventana de la interfaz gráfica.
-	 */
+/**
+ * Ancho de la ventana de la interfaz gráfica.
+ */
 	private int x = 900;
 
-	/**
-	 * Alto de la ventana de la interfaz gráfica.
-	 */
+/**
+ * Alto de la ventana de la interfaz gráfica.
+ */
 	private int y = 600;
 
-	/**
-     * Inicia la interfaz gráfica creando y mostrando la ventana principal
-     * del simulador con el panel de inicio de sesión.
-     */
+/**
+ * Inicia la interfaz gráfica creando y mostrando la ventana principal
+ * del simulador con el panel de inicio de sesión.
+ */
 	
 	public void iniciar() {
 			generarFrame();
@@ -52,12 +52,12 @@ public class Gui {
 			ventana.setVisible(true);
 			ventana.setResizable(true);
 	}
-	/**
-	 * Crea y devuelve el panel de inicio de sesión en el cual se agregan las componentes necesarias
-	 * para que el usuario ingrese su nombre de usuario y contraseña. Igualmente muestra el título del programa.
-	 * 
-	 * @return El panel de inicio de sesión con las componentes necesarias.
-	 */
+/**
+ * Crea y devuelve el panel de inicio de sesión en el cual se agregan las componentes necesarias
+ * para que el usuario ingrese su nombre de usuario y contraseña. Igualmente muestra el título del programa.
+ * 
+ * @return El panel de inicio de sesión con las componentes necesarias.
+ */
 	
 	private JPanel panelInicioSesion() {
 		JPanel inicioSesion = new JPanel();
@@ -149,16 +149,16 @@ public class Gui {
 		return inicioSesion;
 	} 
 	
-	 /**
-     * Crea y devuelve el panel del menú principal para un usuario cuyo rol
-     * es <code>"arqueólogo"</code>. 
-     * <p>
-     * Este panel contiene opciones para la gestión y representación
-     * de dinosaurios, además de un botón para cerrar sesión.
-     * 
-     * @param u el nombre del usuario que inició sesión con rol arqueólogo.
-     * @return el panel de menú principal de arqueólogo.
-     */
+ /**
+ * Crea y devuelve el panel del menú principal para un usuario cuyo rol
+ * es {@code "arqueólogo"}
+ * <p>
+ * Este panel contiene opciones para la gestión y representación
+ * de dinosaurios, además de un botón para cerrar sesión.
+ * 
+ * @param u el nombre del usuario que inició sesión con rol arqueólogo.
+ * @return el panel de menú principal de arqueólogo.
+ */
 	
 	private JPanel panelMenuPrincipalArqueologo(String u) {
 		JPanel menuPrincipal = new JPanel();
@@ -213,14 +213,14 @@ public class Gui {
 		return menuPrincipal;
 	}
 
-	/**
-	 * Crea y devuelve el panel donde se ven los dinosaurios extintos y no extintos.
-	 * Se agregan los botones, paneles y etiquetas junto a botones para cerrar sesión, 
-	 * regresar, etc.
-	 * 
-	 * @param u El nombre del usuario que inicio sesión con rol arqueólogo.
-	 * @return El panel donde se representan los dinosaurios.
-	 */
+/**
+ * Crea y devuelve el panel donde se ven los dinosaurios extintos y no extintos.
+ * Se agregan los botones, paneles y etiquetas junto a botones para cerrar sesión, 
+ * regresar, etc.
+ * 
+ * @param u El nombre del usuario que inicio sesión con rol arqueólogo.
+ * @return El panel donde se representan los dinosaurios.
+ */
 	
 	private JPanel panelRepresentacionDinos(String u) {
 		JPanel menu = new JPanel();
@@ -349,13 +349,13 @@ public class Gui {
 		return menu;
 	}
 
-	/**
-	 * Crea y devuelve el panel donde se gestionan todos los dinosaurios, es decir, donde se pueden eliminar 
-	 * de la lista.
-	 * 
-	 * @param u El nombre del usuario que inicio sesión y cuyo rol ese arqueólogo.
-	 * @return El panel de gestión de los dinosaurios.
-	 */
+/**
+ * Crea y devuelve el panel donde se gestionan todos los dinosaurios, es decir, donde se pueden eliminar 
+ * de la lista.
+ * 
+ * @param u El nombre del usuario que inicio sesión y cuyo rol ese arqueólogo.
+ * @return El panel de gestión de los dinosaurios.
+ */
 	
 	private JPanel panelGestionDinos(String u) {
 		JPanel menu = new JPanel(); 
@@ -459,16 +459,16 @@ public class Gui {
 		return menu;
 		}
 
-	 /**
-     * Crea y devuelve el panel del menú principal para un usuario cuyo rol
-     * es <code>"general"</code>. 
-     * <p>
-     * Este panel contiene opciones para la gestión y representación
-     * de armamentos y un botón para cerrar sesión.
-     * 
-     * @param u el nombre del usuario que inició sesión don rol de arqueólogo.
-     * @return el panel de menú principal correspondiente al arqueólogo.
-     */
+ /**
+ * Crea y devuelve el panel del menú principal para un usuario cuyo rol
+ * es {@code "general"}
+ * <p>
+ * Este panel contiene opciones para la gestión y representación
+ * de armamentos y un botón para cerrar sesión.
+ * 
+ * @param u el nombre del usuario que inició sesión don rol de arqueólogo.
+ * @return el panel de menú principal correspondiente al arqueólogo.
+ */
 	
 	private JPanel panelMenuPrincipalGeneral(String u) {
 		JPanel menuPrincipal = new JPanel();
@@ -522,17 +522,17 @@ public class Gui {
 		return menuPrincipal;
 	}
 	
-	/**
-	 * Crea y devuelve un panel que permite al usuario ver los prototipos 
-	 * visuales de armamentos completos o incompletos, también permite generar 
-	 * imagenes o dibujos de un armamento específico.
-	 * 
-	 * <p>Incluye botón para cerrar sesión, retornar al menú principal, 
-	 * mostrar lista de armas y generar visualizaciones basadas en el ID de un armamento.
-	 * 
-	 * @param u el nombre del usuario que ha iniciado sesión con rol general.
-	 * @return el panel para la visualización de prototipos de armamentos.
-	 */
+/**
+ * Crea y devuelve un panel que permite al usuario ver los prototipos 
+ * visuales de armamentos completos o incompletos, también permite generar 
+ * imagenes o dibujos de un armamento específico.
+ * 
+ * <p>Incluye botón para cerrar sesión, retornar al menú principal, 
+ * mostrar lista de armas y generar visualizaciones basadas en el ID de un armamento.
+ * 
+ * @param u el nombre del usuario que ha iniciado sesión con rol general.
+ * @return el panel para la visualización de prototipos de armamentos.
+ */
 
 	private JPanel prototiposVisualesArmas(String u) {
 		JPanel menu = new JPanel(); 
@@ -660,17 +660,17 @@ public class Gui {
 		menu.add(mostrarC);
 		return menu;
 }
-	/**
-	 * Crea y devuelve un panel que permite al usuario gestionar los armamentos
-	 * almacenados en el sistema.
-	 * 
-	 * <p>Incluye opciones para mostrar una lista de los armamentos existentes y eliminar un armamento 
-	 * específico mediante su ID. También posee un botón para cerrar sesión 
-	 * o regresar al menú principal.
-	 * 
-	 * @param u el nombre del usuario que ha iniciado sesión con rol general.
-	 * @return el panel para la gestión de armamentos.
-	 */
+/**
+ * Crea y devuelve un panel que permite al usuario gestionar los armamentos
+ * almacenados en el sistema.
+ * 
+ * <p>Incluye opciones para mostrar una lista de los armamentos existentes y eliminar un armamento 
+ * específico mediante su ID. También posee un botón para cerrar sesión 
+ * o regresar al menú principal.
+ * 
+ * @param u el nombre del usuario que ha iniciado sesión con rol general.
+ * @return el panel para la gestión de armamentos.
+ */
 	
 	private JPanel panelGestionArmamento(String u) {
 		JPanel menu = new JPanel(); 
@@ -774,15 +774,15 @@ public class Gui {
 		return menu;
 	}
 
-	/**
-     * Valida los datos de acceso ingresadas por el usuario con
-     * los datos almacenados en la clase App.
-     * 
-     * @param usuario el nombre de usuario ingresado.
-     * @param password la contraseña ingresada.
-     * @return el nombre de usuario validado si los datos son correctos;
-     *         {@code null} en caso contrario.
-     */
+/**
+ * Valida los datos de acceso ingresadas por el usuario con
+ * los datos almacenados en la clase App.
+ * 
+ * @param usuario el nombre de usuario ingresado.
+ * @param password la contraseña ingresada.
+ * @return el nombre de usuario validado si los datos son correctos;
+ *         {@code null} en caso contrario.
+ */
 	
 	private String validar(String usuario, String contraseña) {
 		for (int i = 0; i < sistema.getUsuariosSize(); i++) {
@@ -794,11 +794,11 @@ public class Gui {
 		return null;
 	}
 	
-	/**
-     * Crea y configura el {@code JFrame} principal de la aplicación, estableciendo
-     * su tamaño, comportamiento de cierre y otras propiedades.
-     * Este método es invocado por {@link #iniciar()} para generar la ventana.
-     */
+/**
+ * Crea y configura el {@code JFrame} principal de la aplicación, estableciendo
+ * su tamaño, comportamiento de cierre y otras propiedades.
+ * Este método es invocado por {@link #iniciar()} para generar la ventana.
+ */
 	private void generarFrame() {
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setResizable(false);
