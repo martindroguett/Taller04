@@ -7,22 +7,35 @@ import javax.swing.*;
 import javax.swing.border.*;
 import java.io.IOException;
 
+/**
+ * La clase {@code Gui} se encarga de gestionar la interfaz gráfica del
+ * simulador estratégico. 
+ * <p>
+ * Esta interfaz permite a los usuarios iniciar sesión y navegar por los distintos
+ * menús según su rol (general o arqueólogo).
+ * 
+ * <p>Incluye métodos para generar la ventana principal, el panel de inicio de sesión
+ * y los menús correspondientes al rol del usuario.
+ */
+
 public class Gui {
 	private static Sistema sistema = SistemaImpl.getInstance();
 	private static JFrame ventana = new JFrame("Simulador estratégico");
 	private int x = 900;
-	private int y = 700;
-	private boolean acceso = false;
+	private int y = 600;
 
 	/**
-	 * Crea la ventana principal de la interfaz gráfica.
-	 */
+     * Inicia la interfaz gráfica creando y mostrando la ventana principal
+     * del simulador con el panel de inicio de sesión.
+     */
+	
 	public void iniciar() {
 			generarFrame();
 		
 			ventana.getContentPane().add(panelInicioSesion());
 		
 			ventana.setVisible(true);
+			ventana.setResizable(true);
 	}
 	/**
 	 * Crea y devuelve el panel de inicio de sesión en el cual se agregan las componentes necesarias
@@ -30,71 +43,63 @@ public class Gui {
 	 * 
 	 * @return El panel de inicio de sesión con las componentes necesarias.
 	 */
+	
 	private JPanel panelInicioSesion() {
 		
 		JPanel inicioSesion = new JPanel();
 		inicioSesion.setLayout(null);
-		inicioSesion.setBackground(new Color(203, 255, 248));
+		inicioSesion.setBackground(new Color(174, 182, 191));
 		
-		JLabel titulo = new JLabel("Simulador Estratégico Post Guerra!!"); //Creación del título
-		titulo.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		JLabel titulo = new JLabel("Simulador Estratégico Post Guerra!!"); 
+		titulo.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		
 		titulo.setSize(titulo.getPreferredSize());
 		titulo.setLocation((x - titulo.getWidth()) / 2 , (y - titulo.getHeight()) / 8);
 		
-//=============================================================================================================
+
+		JLabel login = new JLabel("INICIO DE SESIÓN"); 
+		login.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		
-		JLabel login = new JLabel("INICIO DE SESIÓN"); //Creación palabra inicio sesión
-		login.setFont(new Font("Times New Roman", Font.BOLD, 25));
-		
-		login.setSize(login.getPreferredSize());
-		login.setLocation((x - login.getWidth()) / 2, (y - login.getHeight()) / 5);
+		login.setSize(200,60);
+		login.setLocation((x - login.getWidth()) / 2, (y - login.getHeight()) / 6);
 	
-//=============================================================================================================
-				
-		JLabel username = new JLabel("Username:"); //Creación palabra username
-		username.setFont(new Font("Times New Roman", Font.BOLD, 15));
+			
+		JLabel username = new JLabel("Username:"); 
+		username.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		
-		username.setSize(username.getPreferredSize());
-		username.setLocation((x - 300) / 2, (y - username.getHeight()) / 4);
+		username.setSize(100,50);
+		username.setLocation((x - 300) / 2, ((y - username.getHeight()) / 4)-6);
 		
-//=============================================================================================================
-		
-		JTextField usuario = new JTextField(); //Creación campo de texto usuario
+	
+		JTextField usuario = new JTextField(); 
 		int largo = 300;
 		int ancho = 30;
-		
 		usuario.setBounds((x - largo) / 2, (y + 2 * ancho) / 4, largo, ancho);
 		usuario.setBackground(Color.WHITE);
-		usuario.setBorder(new LineBorder(Color.GREEN));
+		usuario.setBorder(new LineBorder(Color.DARK_GRAY));
+				
+		JLabel password = new JLabel("Password:"); 
+		password.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		
-//=============================================================================================================
-		
-		JLabel password = new JLabel("Password:"); //Creación palabra password
-		password.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		
-		password.setSize(password.getPreferredSize());
+		password.setSize(100,50);
 		password.setLocation((x - 300) / 2, (y - password.getHeight()) / 3);
-		
-//=============================================================================================================
-		
-		JPasswordField contraseña = new JPasswordField(); //Creación campo de texto contraseña
+				
+		JPasswordField contraseña = new JPasswordField(); 
 		contraseña.setEchoChar('*');
 		largo = 300;
 		ancho = 30;
 
 		contraseña.setBounds((x - largo) / 2, (y + 2 * ancho) / 3 - 6, largo, ancho);
 		contraseña.setBackground(Color.WHITE);
-		contraseña.setBorder(new LineBorder(Color.GREEN));
+		contraseña.setBorder(new LineBorder(Color.DARK_GRAY));
 		
-//=============================================================================================================
-		
-		JButton entrar = new JButton("Sign in"); //Creación botón inicio de sesión
+	
+		JButton entrar = new JButton("Sign in"); 
 		largo = 80;
 		ancho = 30;
 		
 		entrar.setBounds( (x - largo) / 2, (y + 6 * ancho) / 3, largo, ancho);
-		entrar.setBackground(Color.CYAN);
+		entrar.setBackground(Color.gray);
 		entrar.addActionListener(e -> {
 			String userName = validar(usuario.getText(), new String(contraseña.getPassword()));
 			String rol = sistema.getRol(userName);
@@ -118,8 +123,7 @@ public class Gui {
 			}
 		});
 	    
-//=============================================================================================================
-		
+	
 		inicioSesion.add(titulo);
 		inicioSesion.add(login);
 		inicioSesion.add(username);
@@ -131,24 +135,29 @@ public class Gui {
 		return inicioSesion;
 	} 
 	
-	/**
-	 * Crea y devuelve el panel de menú principal cuando el rol del usuario ingresado sea igual a <code>"Arqueólogo"</code>.
-	 * 
-	 * @param u El nombre del usuario que inicio sesión y cuyo rol es arqueólogo.
-	 * @return El panel de menú principal para el rol de arqueólogo.
-	 */
+	 /**
+     * Crea y devuelve el panel del menú principal para un usuario cuyo rol
+     * es <code>"arqueólogo"</code>. 
+     * <p>
+     * Este panel contiene opciones específicas para la gestión y representación
+     * de dinosaurios, además de un botón para cerrar sesión.
+     * 
+     * @param u el nombre del usuario que inició sesión y cuyo rol es arqueólogo.
+     * @return el panel de menú principal correspondiente al arqueólogo.
+     */
+	
 	private JPanel panelMenuPrincipalArqueologo(String u) {
 		JPanel menuPrincipal = new JPanel();
 		menuPrincipal.setLayout(null);
 		menuPrincipal.setBackground(new Color(63, 80, 122));
 		
-		JLabel bienvenida = new JLabel("Bienvenid@ arqueólogo " + u);
-		bienvenida.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		JLabel bienvenida = new JLabel("Bienvenid@ arqueólogo");
+		bienvenida.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		
-		bienvenida.setSize(bienvenida.getPreferredSize());
-		bienvenida.setLocation((x - bienvenida.getWidth()) / 2, (y - bienvenida.getHeight()) / 8);
+		bienvenida.setSize(300,50);
+		bienvenida.setLocation(((x - bienvenida.getWidth()) / 2)+50, (y - bienvenida.getHeight()) / 8);
 		
-		//=============================================================================================================
+		
 		JButton logOut = new JButton("Log Out");
 		int  altoL= 100;
 		int anchoL = 40;
@@ -161,7 +170,6 @@ public class Gui {
 		});
 				
 		
-		//=============================================================================================================
 		JButton gestion = new JButton("Gestionar Dinosaurios");
 		int largo = 300;
 		int ancho = 50;
@@ -174,7 +182,7 @@ public class Gui {
 			ventana.repaint();
 		});
 		
-		//=======================================================================		
+			
 		JButton mostrar = new JButton("Representación Morfológica de Especies");
 		
 		mostrar.setBounds((x - largo) / 2, (y - (ancho)) / 5+ancho+10, largo, ancho);
@@ -199,11 +207,12 @@ public class Gui {
 	 * @param u El nombre del usuario que inicio sesión y cuyo rol es arqueólogo.
 	 * @return El panel donde se representan gráficamente los dinosaurios.
 	 */
+	
 	private JPanel panelRepresentacionDinos(String u) {
-		JPanel menu = new JPanel(); //Panel menu
+		JPanel menu = new JPanel();
 		menu.setLayout(null);
 		menu.setBackground(new Color(120, 120, 100));
-	//=============================================================================================================
+		
 		JButton logOut = new JButton("Log Out");
 		int  altoL= 100;
 		int anchoL = 40;
@@ -215,29 +224,27 @@ public class Gui {
 			ventana.repaint();
 		});
 		
-	//============================================================================================================= //NUEVOOOO
 		JButton retornar = new JButton("Return");
 		int altoR= 100;
 		int anchoR = 40;
-		retornar.setSize(altoR, anchoR);
-		retornar.setLocation((x / 8) - (325) / 4, y - 75);
+		retornar.setBounds((x - altoL -20), 50,  altoL, anchoL);
 		retornar.addActionListener(e -> {
 			ventana.getContentPane().removeAll();
 			ventana.getContentPane().add(panelMenuPrincipalArqueologo(u));
 			ventana.revalidate();
 			ventana.repaint();
 		});
-	//=============================================================================================================
-		JPanel listado = new JPanel(); //Panel donde se muestran los dinosaurios
+	
+		JPanel listado = new JPanel(); 
 		listado.setLayout(new BoxLayout(listado, BoxLayout.Y_AXIS)); 
 		listado.setBackground(Color.WHITE);
 		
 		listado.setSize(400, 600);
-		listado.setLocation((x - 450), (y - 350) / 2);
+		listado.setLocation((x - 450), (y - 300) / 2);
 		
-	//=============================================================================================================
-		JButton mostrarE = new JButton("Mostrar Extintos"); //Botón mostrar dinosaurios extintos
-		mostrarE.setSize(200, 50);
+	
+		JButton mostrarE = new JButton("Mostrar Extintos"); 
+		mostrarE.setSize(300, 40);
 		mostrarE.setLocation((x - 450), (y / 8) - 25);
 		listado.setLayout(new BoxLayout(listado, BoxLayout.Y_AXIS)); 
 		
@@ -255,9 +262,9 @@ public class Gui {
 			listado.repaint();
 		});
 		
-		JButton mostrarNE = new JButton("Mostrar No Extintos"); //Botón mostrar dinosaurios no extintos
-		mostrarNE.setSize(200, 50);
-		mostrarNE.setLocation((x - 450), (y / 8) + 25);
+		JButton mostrarNE = new JButton("Mostrar No Extintos"); 
+		mostrarNE.setSize(300, 40);
+		mostrarNE.setLocation((x - 450), (y / 8) + 20);
 		listado.setLayout(new BoxLayout(listado, BoxLayout.Y_AXIS)); 
 		
 		mostrarNE.addActionListener(e->{
@@ -273,20 +280,17 @@ public class Gui {
 			listado.revalidate();
 			listado.repaint();
 		});
-		JLabel idDino = new JLabel("ID Dinosaurio: "); //Label Id Dinosaurio
+		JLabel idDino = new JLabel("ID Dinosaurio: "); 
 		idDino.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		idDino.setSize(idDino.getPreferredSize());
+		idDino.setSize(200,40);
 		idDino.setLocation(25, 50);
 		
-	//=============================================================================================================
 		
 		JTextField pedirId = new JTextField();
-		pedirId.setSize(idDino.getWidth(), idDino.getHeight() + 5);
-		pedirId.setLocation(23, 50 + idDino.getHeight());
-		
-	//=============================================================================================================
-		
-		JButton ver = new JButton("Ver Dinosaurio"); //Botón ver Dinosaurio
+		pedirId.setSize(idDino.getSize());
+		pedirId.setLocation(140, 40);
+			
+		JButton ver = new JButton("Ver Dinosaurio");
 		ver.setSize(150, 40);
 		ver.setLocation(23, 100);
 		ver.addActionListener(e -> {
@@ -303,11 +307,11 @@ public class Gui {
 				if (dinoNombre != null) {
 					try {
 						ImagePanel image = new ImagePanel("images/" + dinoNombre + ".png", 400, 400);
-						image.setBounds(25, 150, 400, 400);
+						image.setBounds(25, 150, 300, 300);
 						menu.add(image, 0);
 						menu.revalidate();
 						menu.repaint();
-					} catch (IOException er) { //Si llega aca no existe la imagen del dino, pero si el dino
+					} catch (IOException er) { 
 						DrawPanel dibujo = new DrawPanel(dinoNombre, 400, 400);
 						dibujo.setBounds(25, 150, 400, 400);
 						menu.add(dibujo, 0);
@@ -338,11 +342,12 @@ public class Gui {
 	 * @param u El nombre del usuario que inicio sesión y cuyo rol ese arqueólogo.
 	 * @return El panel de gestión de los dinosaurios.
 	 */
+	
 	private JPanel panelGestionDinos(String u) {
-		JPanel menu = new JPanel(); //Panel menu
+		JPanel menu = new JPanel(); 
 		menu.setLayout(null);
 		menu.setBackground(new Color(120, 120, 100));
-	//=============================================================================================================
+	
 		JButton logOut = new JButton("Log Out");
 		int  altoL= 100;
 		int anchoL = 40;
@@ -353,31 +358,27 @@ public class Gui {
 			ventana.revalidate();
 			ventana.repaint();
 		});
-		
-	//============================================================================================================= //NUEVOOOO
+	
 		JButton retornar = new JButton("Return");
 		int altoR= 100;
 		int anchoR = 40;
-		retornar.setSize(altoR, anchoR);
-		retornar.setLocation((x / 8) - (200) / 4, (y / 4) + 200);
+		retornar.setBounds((x - altoL -20), 50,  altoL, anchoL);
 		retornar.addActionListener(e -> {
 			ventana.getContentPane().removeAll();
 			ventana.getContentPane().add(panelMenuPrincipalArqueologo(u));
 			ventana.revalidate();
 			ventana.repaint();
 		});
-	//=============================================================================================================
-		
-		JPanel listado = new JPanel(); //Panel donde se muestran los dinosaurios
+	
+		JPanel listado = new JPanel(); 
 		listado.setLayout(new BoxLayout(listado, BoxLayout.Y_AXIS)); 
 		listado.setBackground(Color.WHITE);
 		
 		listado.setSize(400, 600);
 		listado.setLocation((x - 450), (y - 350) / 2);
 		
-	//=============================================================================================================
-		
-		JButton mostrar = new JButton("Mostrar Dinosaurios"); //Botón mostrar dinosaurios
+	
+		JButton mostrar = new JButton("Mostrar Dinosaurios");
 		mostrar.setSize(200, 50);
 		mostrar.setLocation((x - 450), (y / 8) - 25);
 		listado.setLayout(new BoxLayout(listado, BoxLayout.Y_AXIS)); 
@@ -392,23 +393,18 @@ public class Gui {
 			listado.revalidate();
 			listado.repaint();
 		});
-		
-	//=============================================================================================================
-		
-		JLabel idDino = new JLabel("ID Dinosaurio: "); //Label Id Dinosaurio
+			
+		JLabel idDino = new JLabel("ID Dinosaurio: "); 
 		idDino.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		idDino.setSize(idDino.getPreferredSize());
 		idDino.setLocation((x / 8) + 25, (y / 4));
 		
-	//=============================================================================================================
 		
 		JTextField pedirId = new JTextField();
 		pedirId.setSize(idDino.getWidth(), idDino.getHeight() + 5);
 		pedirId.setLocation((x / 8) + 23, (y / 4) + idDino.getHeight());
-		
-	//=============================================================================================================
-		
-		JButton eliminar = new JButton("Eliminar Dinosaurio"); //Botón Eliminar Dinosaurio
+			
+		JButton eliminar = new JButton("Eliminar Dinosaurio"); 
 		eliminar.setSize(200, 50);
 		eliminar.setLocation((x / 8) - (200 - pedirId.getWidth()) / 4, (y / 4) + 50);
 		eliminar.addActionListener(e -> {
@@ -449,21 +445,30 @@ public class Gui {
 		return menu;
 		}
 
-//-------------------------------------------------------------------------------------------------------------
-	
+
+	 /**
+     * Crea y devuelve el panel del menú principal para un usuario cuyo rol
+     * es <code>"general"</code>. 
+     * <p>
+     * Este panel contiene opciones específicas para la gestión y representación
+     * de armamentos y un botón para cerrar sesión.
+     * 
+     * @param u el nombre del usuario que inició sesión y cuyo rol es arqueólogo.
+     * @return el panel de menú principal correspondiente al arqueólogo.
+     */
 	
 	private JPanel panelMenuPrincipalGeneral(String u) {
 		JPanel menuPrincipal = new JPanel();
 		menuPrincipal.setLayout(null);
 		menuPrincipal.setBackground(new Color(63, 80, 122));
 		
-		JLabel bienvenida = new JLabel("Bienvenid@ general " + u);
-		bienvenida.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		JLabel bienvenida = new JLabel("Bienvenid@ general ");
+		bienvenida.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		
-		bienvenida.setSize(bienvenida.getPreferredSize());
-		bienvenida.setLocation((x - bienvenida.getWidth()) / 2, (y - bienvenida.getHeight()) / 8);
+		bienvenida.setSize(300,50);
+		bienvenida.setLocation(((x - bienvenida.getWidth()) / 2)+50, (y - bienvenida.getHeight()) / 8);
 		
-//=============================================================================================================
+
 		JButton logOut = new JButton("Log Out");
 		int  altoL= 100;
 		int anchoL = 40;
@@ -476,7 +481,6 @@ public class Gui {
 		});
 				
 	
-//=============================================================================================================
 		JButton gestion = new JButton("Gestionar Armamento");
 		int largo = 300;
 		int ancho = 50;
@@ -488,8 +492,7 @@ public class Gui {
 			ventana.revalidate();
 			ventana.repaint();
 		});
-		
-//=======================================================================		
+			
 		JButton mostrar = new JButton("Mostrar prototipos visuales");
 		
 		mostrar.setBounds((x - largo) / 2, (y - (ancho)) / 5+ancho+10, largo, ancho);
@@ -506,9 +509,20 @@ public class Gui {
 		return menuPrincipal;
 	}
 	
-//MÉTODO PARA MOSTRAR LOS PROTOTIPOS VISUALES DE TECNOLOGÍA BÉLICA
+	/**
+	 * Crea y devuelve un panel que permite al usuario ver los prototipos 
+	 * visuales de armamentos completos o incompletos, también permite generar 
+	 * imagenes o dibujos de un armamento específico.
+	 * 
+	 * <p>Incluye botón para cerrar sesión, retornar al menú principal, 
+	 * mostrar lista de armas y generar visualizaciones basadas en el ID de un armamento.
+	 * 
+	 * @param u el nombre del usuario que ha iniciado sesión (rol general).
+	 * @return el panel configurado para la visualización de prototipos de armamentos.
+	 */
+
 	private JPanel prototiposVisualesArmas(String u) {
-		JPanel menu = new JPanel(); //Panel menu
+		JPanel menu = new JPanel(); 
 		menu.setLayout(null);
 		menu.setBackground(new Color(120, 120, 100));
 		
@@ -526,34 +540,33 @@ public class Gui {
 		JButton retornar = new JButton("Return");
 		int altoR= 100;
 		int anchoR = 40;
-		retornar.setSize(altoR, anchoR);
-		retornar.setLocation(20, 600);
+		retornar.setBounds((x - altoL -20), 50,  altoL, anchoL);
 		retornar.addActionListener(e -> {
 			ventana.getContentPane().removeAll();
-			ventana.getContentPane().add(panelMenuPrincipalGeneral(u));
+			ventana.getContentPane().add(panelMenuPrincipalArqueologo(u));
 			ventana.revalidate();
 			ventana.repaint();
 		});
-//=============================================================================================================
-		JLabel idArmamento = new JLabel("ID Armamento: "); //Label Id Armamento
+
+		JLabel idArmamento = new JLabel("ID Armamento: "); 
 		idArmamento.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		idArmamento.setSize(idArmamento.getPreferredSize());
+		idArmamento.setSize(200,40);
 		idArmamento.setLocation(25, 50);
 		
 		JTextField pedirId = new JTextField();
-		pedirId.setSize(idArmamento.getWidth(), idArmamento.getHeight() + 5);
-		pedirId.setLocation(23, 50 + idArmamento.getHeight());
+		pedirId.setSize(idArmamento.getSize());
+		pedirId.setLocation(140,40);
 		
-// ================================================================================================================
-		JPanel listado = new JPanel(); //Panel donde se muestra la lista de armamentos
+		JPanel listado = new JPanel(); 
 		listado.setLayout(new BoxLayout(listado, BoxLayout.Y_AXIS)); 
 		listado.setBackground(Color.WHITE);
 		
 		listado.setSize(400, 600);
 		listado.setLocation((x - 450), (y - 350) / 2);
 		
-		JButton mostrarC = new JButton("Generar prototipos completos"); //Botón mostrar prototipos completos
-		mostrarC.setSize(mostrarC.getPreferredSize());
+		
+		JButton mostrarC = new JButton("Generar prototipos completos"); 
+		mostrarC.setSize(300,30);
 		mostrarC.setLocation((x - 450), (y / 8) - 25);
 		listado.setLayout(new BoxLayout(listado, BoxLayout.Y_AXIS)); 
 		
@@ -571,9 +584,9 @@ public class Gui {
 			listado.repaint();
 		});
 		
-		JButton mostrarI = new JButton("Generar prototipos incompletos"); //Botón mostrar prototipos incompletos
-		mostrarI.setSize(mostrarI.getPreferredSize());
-		mostrarI.setLocation((x - 450), (y / 8) + 25);
+		JButton mostrarI = new JButton("Generar prototipos incompletos"); 
+		mostrarI.setSize(300,30);
+		mostrarI.setLocation((x - 450), (y / 8) + 10);
 		listado.setLayout(new BoxLayout(listado, BoxLayout.Y_AXIS)); 
 		
 		mostrarI.addActionListener(e->{
@@ -590,7 +603,7 @@ public class Gui {
 			listado.repaint();
 		});
 		
-		JButton generar = new JButton("Generar"); //Botón para generar el armamento
+		JButton generar = new JButton("Generar"); 
 		generar.setSize(150, 40);
 		generar.setLocation(23, 100);
 		generar.addActionListener(e -> {
@@ -634,13 +647,23 @@ public class Gui {
 		menu.add(mostrarC);
 		return menu;
 }
-
-	// GESTION DE ARMAMENTOS
+	/**
+	 * Crea y devuelve un panel que permite al usuario gestionar los armamentos
+	 * registrados en el sistema.
+	 * 
+	 * <p>Incluye opciones para mostrar una lista de los armamentos existentes y eliminar un armamento 
+	 * específico mediante su ID. También proporciona botón para cerrar sesión 
+	 * o regresar al menú principal.
+	 * 
+	 * @param u el nombre del usuario que ha iniciado sesión (rol general).
+	 * @return el panel configurado para la gestión de armamentos.
+	 */
+	
 	private JPanel panelGestionArmamento(String u) {
 		JPanel menu = new JPanel(); //Panel menu
 		menu.setLayout(null);
 		menu.setBackground(new Color(120, 120, 100));
-//=============================================================================================================
+
 		JButton logOut = new JButton("Log Out");
 		int  altoL= 100;
 		int anchoL = 40;
@@ -653,28 +676,23 @@ public class Gui {
 		});
 		
 		JButton retornar = new JButton("Return");
-		int altoR= 100;
-		int anchoR = 40;
-		retornar.setSize(altoR, anchoR);
-		retornar.setLocation((x / 8) - (200) / 4, (y / 4) + 200);
+		
+		retornar.setBounds((x - altoL -20), 50,  altoL, anchoL);
 		retornar.addActionListener(e -> {
 			ventana.getContentPane().removeAll();
-			ventana.getContentPane().add(panelMenuPrincipalGeneral(u));
+			ventana.getContentPane().add(panelMenuPrincipalArqueologo(u));
 			ventana.revalidate();
 			ventana.repaint();
 		});
-//=============================================================================================================
-		
-		JPanel listado = new JPanel(); //Panel donde se muestran los armamentos
+
+		JPanel listado = new JPanel(); 
 		listado.setLayout(new BoxLayout(listado, BoxLayout.Y_AXIS)); 
 		listado.setBackground(Color.WHITE);
 		
 		listado.setSize(400, 600);
 		listado.setLocation((x - 450), (y - 350) / 2);
-		
-//=============================================================================================================
-		
-		JButton mostrar = new JButton("Mostrar Armamento"); //Botón mostrar armamento
+			
+		JButton mostrar = new JButton("Mostrar Armamento"); 
 		mostrar.setSize(200, 50);
 		mostrar.setLocation((x - 450), (y / 8) - 25);
 		listado.setLayout(new BoxLayout(listado, BoxLayout.Y_AXIS)); 
@@ -691,22 +709,17 @@ public class Gui {
 			listado.repaint();
 		});
 		
-//=============================================================================================================
 		
-		JLabel idArmamento = new JLabel("ID Armamento: "); //Label Id Armamento
+		JLabel idArmamento = new JLabel("ID Armamento: "); 
 		idArmamento.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		idArmamento.setSize(idArmamento.getPreferredSize());
 		idArmamento.setLocation((x / 8) + 25, (y / 4));
-		
-//=============================================================================================================
 		
 		JTextField pedirId = new JTextField();
 		pedirId.setSize(idArmamento.getWidth(), idArmamento.getHeight() + 5);
 		pedirId.setLocation((x / 8) + 23, (y / 4) + idArmamento.getHeight());
 		
-//=============================================================================================================
-		
-		JButton eliminar = new JButton("Eliminar Armamento"); //Botón Eliminar armamento
+		JButton eliminar = new JButton("Eliminar Armamento"); 
 		eliminar.setSize(200, 50);
 		eliminar.setLocation((x / 8) - (200 - pedirId.getWidth()) / 4, (y / 4) + 50);
 		eliminar.addActionListener(e -> {
@@ -748,17 +761,31 @@ public class Gui {
 		return menu;
 	}
 
-// Método para validar el ingreso de los usuarios con los datos guardados
+	/**
+     * Valida los datos de acceso ingresadas por el usuario con
+     * los datos almacenados en la App.
+     * 
+     * @param usuario el nombre de usuario ingresado.
+     * @param password la contraseña ingresada.
+     * @return el nombre de usuario validado si las credenciales son correctas;
+     *         {@code null} en caso contrario.
+     */
+	
 	private String validar(String usuario, String contraseña) {
 		for (int i = 0; i < sistema.getUsuariosSize(); i++) {
 			String u = sistema.validar(usuario, contraseña);
 					if (u != null) {
-						return u;   //revisarrrrrrrrr
+						return u;   
 					}
 		}
 		return null;
 	}
-	// Método para generar la ventana general
+	
+	/**
+     * Crea y configura el {@code JFrame} principal de la aplicación, estableciendo
+     * su tamaño, comportamiento de cierre y otras propiedades.
+     * Este método es invocado por {@link #iniciar()} para preparar la ventana.
+     */
 	private void generarFrame() {
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setResizable(false);
