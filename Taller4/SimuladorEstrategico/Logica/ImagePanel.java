@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
- * La clase <code>ImagePanel</code> se encarga de crear un panel donde se muestra
+ * La clase {@code ImagePanel} se encarga de crear un panel donde se muestra
  * una imagen.
  * Contiene los métodos necesarios para definir el tamaño del panel y la imagen específica.
  * 
@@ -36,7 +36,7 @@ public class ImagePanel extends JPanel{
      * @param imagePath Un String que representa la dirección donde está almacenada la imagen a mostrar.
      * @param width El ancho del panel, es un número entero.
      * @param height El largo o altura del panel, es un número entero.
-     * @throws IOException Si la dirección de la imagen no existe lanza una excepción del tipo <code>IOException</code>.
+     * @throws IOException Si la dirección de la imagen no existe lanza una excepción del tipo {@code IOException}.
      */
     public ImagePanel(String imagePath, int width, int height) throws IOException {
         this.width = width;
