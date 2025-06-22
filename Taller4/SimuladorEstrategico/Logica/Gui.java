@@ -19,9 +19,24 @@ import java.io.IOException;
  */
 
 public class Gui {
+	/**
+	 * Instancia única del sistema que gestiona la lógica del simulador estratégico.
+	 */
 	private static Sistema sistema = SistemaImpl.getInstance();
+
+	/**
+	 * Ventana principal de la interfaz gráfica del simulador.
+	 */
 	private static JFrame ventana = new JFrame("Simulador estratégico");
+
+	/**
+	 * Ancho de la ventana de la interfaz gráfica.
+	 */
 	private int x = 900;
+
+	/**
+	 * Alto de la ventana de la interfaz gráfica.
+	 */
 	private int y = 600;
 
 	/**
@@ -33,7 +48,6 @@ public class Gui {
 			generarFrame();
 		
 			ventana.getContentPane().add(panelInicioSesion());
-		
 			ventana.setVisible(true);
 			ventana.setResizable(true);
 	}
@@ -307,7 +321,7 @@ public class Gui {
 				if (dinoNombre != null) {
 					try {
 						ImagePanel image = new ImagePanel("images/" + dinoNombre + ".png", 400, 400);
-						image.setBounds(25, 150, 300, 300);
+						image.setBounds(25, 150, 400, 400);
 						menu.add(image, 0);
 						menu.revalidate();
 						menu.repaint();
@@ -396,17 +410,17 @@ public class Gui {
 			
 		JLabel idDino = new JLabel("ID Dinosaurio: "); 
 		idDino.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		idDino.setSize(idDino.getPreferredSize());
+		idDino.setSize(200,40);
 		idDino.setLocation((x / 8) + 25, (y / 4));
 		
 		
 		JTextField pedirId = new JTextField();
-		pedirId.setSize(idDino.getWidth(), idDino.getHeight() + 5);
-		pedirId.setLocation((x / 8) + 23, (y / 4) + idDino.getHeight());
+		pedirId.setSize(idDino.getWidth(), idDino.getHeight());
+		pedirId.setLocation((x / 8), (y / 4) + idDino.getHeight());
 			
 		JButton eliminar = new JButton("Eliminar Dinosaurio"); 
 		eliminar.setSize(200, 50);
-		eliminar.setLocation((x / 8) - (200 - pedirId.getWidth()) / 4, (y / 4) + 50);
+		eliminar.setLocation((x / 8) - (200 - pedirId.getWidth()) / 4, (y / 4) + 100);
 		eliminar.addActionListener(e -> {
 			if (pedirId.getText() == null) {
 				JOptionPane.showMessageDialog(null, "Por favor ingrese una id!");

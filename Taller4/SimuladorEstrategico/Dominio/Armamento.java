@@ -1,5 +1,10 @@
 package Dominio;
 
+/**
+ * La clase {@code Armamento} define
+ * 
+ * @author Martín Ignacio Droguett Robledo, Catalina Andrea Galleguillos Carvajal.
+ */
 public class Armamento {
 	private int id;
 	private String nombre;

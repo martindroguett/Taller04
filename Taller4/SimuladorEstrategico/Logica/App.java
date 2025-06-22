@@ -13,10 +13,19 @@ import java.io.FileNotFoundException;
  * y lanzar el simulador.
  * 
  * <p>Los datos cargados corresponden a usuarios, dinosaurios y armamentos.
+ *  @author Martín Ignacio Droguett Robledo, Catalina Andrea Galleguillos Carvajal.
  */
 
 public class App {
+	/**
+	 * Sistema de simulación utilizado por la aplicación.
+	 */
+	
 	private static Sistema sistema = SistemaImpl.getInstance();
+	/**
+	 * Scanner utilizado para leer la entrada estándar (por consola).
+	 */
+	
 	private static Scanner scanner = new Scanner(System.in);
 	
 	/**

@@ -8,17 +8,57 @@ import javax.swing.border.LineBorder;
 
 import java.awt.*;
 
+/**
+ * Una implementación concreta de la interfaz <code>Sistema</code>.
+ * 
+ * <p> Esta clase se encarga del manejo de todas las operaciones y cálculos relacionados al sistema, 
+ * el acceso a los datos, además de la implementación de la interfaz gráfica de usuario <code>Gui</code>.
+ * 
+ * @author Martín Ignacio Droguett Robledo, Catalina Andrea Galleguillos Carvajal.
+ */
 public class SistemaImpl implements Sistema {
 	
+	/**
+	 * La unica instancia de <code>SistemaImpl</code>, sigue el patrón de diseño Singleton.
+	 */
 	private static SistemaImpl instance;
+	
+	/**
+	 * Instancia de la interfaz gráfica de usuario.
+	 */
 	private static Gui gui = new Gui();
+	
+	/**
+	 * Lista de armamentos registrados en el sistema.
+	 * Se utiliza para obtener datos de un armamento en específico y para la validación de este.
+	 */
 	private static List<Armamento> armamentos = new ArrayList<>();
+	
+	/**
+	 * Lista de dinosaurios registrados en el sistema.
+	 * Se utiliza para obtener datos de un dinosaurio en específico y para la validación de este.
+	 */
 	private static List <Dinosaurio> dinosaurios = new ArrayList<>();
+	
+	/**
+	 * Lista de usuario registrados en el sistema.
+	 * Se utiliza para obtener datos de un usuario en específico y para la validación de este.
+	 */
 	private static List<Usuario> usuarios = new ArrayList<>();
 	
+	/**
+	 * Constructor privado para evitar que se cree una nueva instancia de este desde la app.
+	 * El constructor es privado porque el patrón Singleton asegura que haya una única instancia.
+	 */
 	private SistemaImpl() {}
 	
-	public static SistemaImpl getInstance() {
+	/**
+	 * Devuelve la unica instancia de la clase <code>SistemaImpl></code>.
+	 * Si la instancia no ha sido creada aún, se crea una nueva.
+	 * 
+	 * @return La única instancia de <code>SistemaImpl></code>.
+	 */
+	public static Sistema getInstance() {
 		if (instance == null) {
 			instance = new SistemaImpl();
 		}
@@ -63,23 +103,27 @@ public class SistemaImpl implements Sistema {
 		gui.iniciar();
 	}
 
-	// MÉTODO PARA ELIMINAR EL ARMEMENTO DE LA LISTA DE ARMAMENTOS
 	@Override
 	public boolean removeArmamento(int id) {
 		Armamento eliminar = buscarArmamento(id);
 		if (eliminar != null) {
 			armamentos.remove(eliminar);
-			return true; // SI SE ENCUENTRA RETORNA VERDADERO
+			return true; 
 		} 
 		return false; 
 	}
 
-	// MÉTODO PARA BUSCAR EL ARMAMENTO SEGÚN EL ID 
+	/**
+	 * Método privado que busca un armamento en específico a partir de su id y lo retorna.
+	 * Privado debido a que el sistema no puede retornar objetos a través de un método público.
+	 * 
+	 * @param id La id única de la instancia de <code>Armamento</code> que se está buscando.
+	 * @return La instancia de <code>Armamento</code> a la cual pertenece la id. 
+	 */
 	private Armamento buscarArmamento(int id) {
 		for (Armamento a: armamentos) {
 			if(a.getId() == id) return a;
 		}
-		// SI ES QUE NO LO ENCUENTRA RETORNA NULO
 		return null;
 	}
 
@@ -101,11 +145,17 @@ public class SistemaImpl implements Sistema {
 		return false; 
 	}
 	
+	/**
+	 * Método privado que busca un dinosaurio en específico a partir de su id y lo retorna.
+	 * Privado debido a que el sistema no puede retornar objetos a través de un método público.
+	 * 
+	 * @param id La id única de la instancia de <code>Dinosaurio</code> que se está buscando.
+	 * @return La instancia de <code>Dinosaurio</code> a la cual pertenece la id. 
+	 */
 	private Dinosaurio buscarDinosaurio(int id) {
 		for (Dinosaurio d: dinosaurios) {
 			if(d.getId() == id) return d;
 		}
-		// SI ES QUE NO LO ENCUENTRA RETORNA NULOs
 		return null;
 	}
 
