@@ -693,7 +693,7 @@ public class Gui {
 		retornar.setBounds((x - altoL -20), 50,  altoL, anchoL);
 		retornar.addActionListener(e -> {
 			ventana.getContentPane().removeAll();
-			ventana.getContentPane().add(panelMenuPrincipalArqueologo(u));
+			ventana.getContentPane().add(panelMenuPrincipalGeneral(u));
 			ventana.revalidate();
 			ventana.repaint();
 		});
